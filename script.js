@@ -1,4 +1,12 @@
 /* =========================================
+   CONNEXION GOOGLE SHEETS
+========================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxUR9o_iIO5gFRKaVz_8MiDOCdX2VDuQQSdKyRm9_OJ5XMGla9lhvc_ajmMfLoOp6Xf/exec";
+
+
+/* =========================================
    QUESTIONS DU MARIAGE
 ========================================= */
 
@@ -107,11 +115,14 @@ let answers = [];
    ELEMENTS HTML
 ========================================= */
 
-const intro = document.getElementById("intro");
+const intro =
+    document.getElementById("intro");
 
-const questionnaire = document.getElementById("questionnaire");
+const questionnaire =
+    document.getElementById("questionnaire");
 
-const success = document.getElementById("success");
+const success =
+    document.getElementById("success");
 
 const questionContainer =
     document.getElementById("question-container");
@@ -130,7 +141,7 @@ const nextButton =
 
 
 /* =========================================
-   COMMENCER
+   COMMENCER LE QUESTIONNAIRE
 ========================================= */
 
 function startQuest() {
@@ -141,8 +152,9 @@ function startQuest() {
 
     currentQuestion = 0;
 
-    showQuestion();
+    answers = [];
 
+    showQuestion();
 }
 
 
@@ -152,14 +164,17 @@ function startQuest() {
 
 function showQuestion() {
 
-    const question = questions[currentQuestion];
+    const question =
+        questions[currentQuestion];
 
     questionContainer.innerHTML = "";
 
 
-    const number = document.createElement("div");
+    const number =
+        document.createElement("div");
 
-    number.className = "question-number";
+    number.className =
+        "question-number";
 
     number.textContent =
         `QUESTION ${currentQuestion + 1}`;
@@ -167,107 +182,127 @@ function showQuestion() {
     questionContainer.appendChild(number);
 
 
-    const title = document.createElement("div");
+    const title =
+        document.createElement("div");
 
-    title.className = "question-title";
+    title.className =
+        "question-title";
 
-    title.textContent = question.title;
+    title.textContent =
+        question.title;
 
     questionContainer.appendChild(title);
 
 
-    /* -------------------------------
-       CHOIX
-    -------------------------------- */
+    /* ---------------------------------------
+       QUESTIONS À CHOIX
+    --------------------------------------- */
 
     if (question.type === "choice") {
 
         const answersContainer =
             document.createElement("div");
 
-        answersContainer.className = "answers";
+        answersContainer.className =
+            "answers";
 
 
-        question.answers.forEach((answer, index) => {
+        question.answers.forEach((answer) => {
 
             const button =
                 document.createElement("button");
 
-            button.className = "answer-button";
+            button.className =
+                "answer-button";
 
-            button.textContent = answer;
+            button.textContent =
+                answer;
 
 
-            if (
-                answers[currentQuestion] === answer
-            ) {
+            if (answers[currentQuestion] === answer) {
 
                 button.classList.add("selected");
 
             }
 
 
-            button.onclick = function() {
+            button.onclick = function () {
 
-                answers[currentQuestion] = answer;
+                answers[currentQuestion] =
+                    answer;
 
                 document
                     .querySelectorAll(".answer-button")
-                    .forEach(btn =>
-                        btn.classList.remove("selected")
-                    );
+                    .forEach(btn => {
 
-                button.classList.add("selected");
+                        btn.classList.remove(
+                            "selected"
+                        );
 
+                    });
+
+                button.classList.add(
+                    "selected"
+                );
             };
 
 
-            answersContainer.appendChild(button);
+            answersContainer.appendChild(
+                button
+            );
 
         });
 
 
-        questionContainer.appendChild(answersContainer);
-
+        questionContainer.appendChild(
+            answersContainer
+        );
     }
 
 
-    /* -------------------------------
-       TEXTE
-    -------------------------------- */
+    /* ---------------------------------------
+       QUESTIONS TEXTE
+    --------------------------------------- */
 
     if (question.type === "text") {
 
         const input =
             document.createElement("textarea");
 
-        input.className = "text-input";
+        input.className =
+            "text-input";
 
-        input.placeholder = question.placeholder;
+        input.placeholder =
+            question.placeholder;
 
         input.value =
             answers[currentQuestion] || "";
 
 
-        input.addEventListener("input", function() {
+        input.addEventListener(
+            "input",
+            function () {
 
-            answers[currentQuestion] =
-                input.value;
+                answers[currentQuestion] =
+                    input.value;
 
-        });
+            }
+        );
 
 
-        questionContainer.appendChild(input);
-
+        questionContainer.appendChild(
+            input
+        );
     }
 
 
-    /* -------------------------------
-       PROGRESSION
-    -------------------------------- */
+    /* ---------------------------------------
+       BARRE DE PROGRESSION
+    --------------------------------------- */
 
     const progress =
-        ((currentQuestion + 1) / questions.length) * 100;
+        ((currentQuestion + 1)
+        / questions.length) * 100;
 
     progressBar.style.width =
         progress + "%";
@@ -276,9 +311,9 @@ function showQuestion() {
         `Question ${currentQuestion + 1} / ${questions.length}`;
 
 
-    /* -------------------------------
+    /* ---------------------------------------
        BOUTON RETOUR
-    -------------------------------- */
+    --------------------------------------- */
 
     if (currentQuestion === 0) {
 
@@ -289,15 +324,17 @@ function showQuestion() {
 
         previousButton.style.visibility =
             "visible";
-
     }
 
 
-    /* -------------------------------
+    /* ---------------------------------------
        BOUTON SUIVANT
-    -------------------------------- */
+    --------------------------------------- */
 
-    if (currentQuestion === questions.length - 1) {
+    if (
+        currentQuestion ===
+        questions.length - 1
+    ) {
 
         nextButton.textContent =
             "⚔️ Sceller ma réponse";
@@ -306,9 +343,7 @@ function showQuestion() {
 
         nextButton.textContent =
             "Continuer →";
-
     }
-
 }
 
 
@@ -322,8 +357,6 @@ function nextQuestion() {
         answers[currentQuestion];
 
 
-    /* Vérification */
-
     if (
         currentAnswer === undefined ||
         currentAnswer === ""
@@ -334,27 +367,23 @@ function nextQuestion() {
         );
 
         return;
-
     }
 
 
-    /* Si dernière question */
-
     if (
-        currentQuestion === questions.length - 1
+        currentQuestion ===
+        questions.length - 1
     ) {
 
         finishQuest();
 
         return;
-
     }
 
 
     currentQuestion++;
 
     showQuestion();
-
 }
 
 
@@ -369,31 +398,106 @@ function previousQuestion() {
         currentQuestion--;
 
         showQuestion();
-
     }
-
 }
 
 
 /* =========================================
-   FIN DU QUESTIONNAIRE
+   ENVOI DES REPONSES
 ========================================= */
 
-function finishQuest() {
+async function finishQuest() {
 
-    questionnaire.classList.remove("active");
+    nextButton.disabled = true;
 
-    success.classList.add("active");
+    nextButton.textContent =
+        "⚔️ Scellement en cours...";
 
 
-    /*
-       Pour l'instant les réponses restent
-       dans le navigateur.
+    /* Préparation des données */
 
-       Nous ajouterons ensuite l'envoi
-       vers un formulaire / tableau.
-    */
+    const data = {
 
-    console.log("Réponses du Royaume :", answers);
+        presence:
+            answers[0] || "",
 
+        nom:
+            answers[1] || "",
+
+        compagnie:
+            answers[2] || "",
+
+        enfants:
+            answers[3] || "",
+
+        menu:
+            answers[4] || "",
+
+        restrictions:
+            answers[5] || "",
+
+        hebergement:
+            answers[6] || "",
+
+        message:
+            answers[7] || ""
+    };
+
+
+    try {
+
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
+
+                mode: "no-cors",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify(data)
+            }
+        );
+
+
+        /* ---------------------------------
+           Réponse envoyée
+        --------------------------------- */
+
+        questionnaire.classList.remove(
+            "active"
+        );
+
+        success.classList.add(
+            "active"
+        );
+
+
+        console.log(
+            "Réponse envoyée :",
+            data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Erreur lors de l'envoi :",
+            error
+        );
+
+
+        alert(
+            "⚠️ Le messager n'a pas réussi à transmettre votre réponse. Veuillez réessayer."
+        );
+
+
+        nextButton.disabled = false;
+
+        nextButton.textContent =
+            "⚔️ Sceller ma réponse";
+    }
 }
