@@ -65,7 +65,6 @@ const questions = [
         answers: [
             "🍖 Menu classique",
             "🌿 Menu végétarien",
-            "🥕 Menu végétalien",
             "🧒 Menu enfant",
             "📜 Autre / besoin particulier"
         ]
