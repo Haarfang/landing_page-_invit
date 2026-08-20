@@ -65,7 +65,6 @@ const questions = [
         answers: [
             "🍖 Menu classique",
             "🌿 Menu végétarien",
-            "🥕 Menu végétalien",
             "🧒 Menu enfant",
             "📜 Autre / besoin particulier"
         ]
@@ -109,6 +108,8 @@ const questions = [
 let currentQuestion = 0;
 
 let answers = [];
+
+let declined = false;
 
 
 /* =========================================
