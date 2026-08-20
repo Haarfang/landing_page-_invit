@@ -151,9 +151,11 @@ function startQuest() {
 
     questionnaire.classList.add("active");
 
-    currentQuestion = 0;
+currentQuestion = 0;
 
-    answers = [];
+answers = [];
+
+declined = false;
 
     showQuestion();
 }
@@ -227,25 +229,44 @@ function showQuestion() {
             }
 
 
-            button.onclick = function () {
+button.onclick = function () {
 
-                answers[currentQuestion] =
-                    answer;
+    answers[currentQuestion] =
+        answer;
 
-                document
-                    .querySelectorAll(".answer-button")
-                    .forEach(btn => {
+    document
+        .querySelectorAll(".answer-button")
+        .forEach(btn => {
 
-                        btn.classList.remove(
-                            "selected"
-                        );
+            btn.classList.remove(
+                "selected"
+            );
 
-                    });
+        });
 
-                button.classList.add(
-                    "selected"
-                );
-            };
+    button.classList.add(
+        "selected"
+    );
+
+
+    /* ================================
+       L'INVITÉ NE SERA PAS PRÉSENT
+    ================================= */
+
+    if (
+        currentQuestion === 0 &&
+        answer.includes("Hélas")
+    ) {
+
+        declined = true;
+
+    } else if (currentQuestion === 0) {
+
+        declined = false;
+
+    }
+
+};
 
 
             answersContainer.appendChild(
@@ -336,15 +357,26 @@ function showQuestion() {
         currentQuestion ===
         questions.length - 1
     ) {
+if (
+    declined &&
+    currentQuestion === 1
+) {
 
-        nextButton.textContent =
-            "⚔️ Sceller ma réponse";
+    nextButton.textContent =
+        "⚔️ Sceller ma réponse";
 
-    } else {
+} else if (
+    currentQuestion ===
+    questions.length - 1
+) {
 
-        nextButton.textContent =
-            "Continuer →";
-    }
+    nextButton.textContent =
+        "⚔️ Sceller ma réponse";
+
+} else {
+
+    nextButton.textContent =
+        "Continuer →";
 }
 
 
@@ -353,6 +385,109 @@ function showQuestion() {
 ========================================= */
 
 function nextQuestion() {
+
+    const currentAnswer =
+        answers[currentQuestion];
+
+
+    /* ================================
+       VÉRIFICATION DE LA RÉPONSE
+    ================================= */
+
+    if (
+        currentAnswer === undefined ||
+        currentAnswer === ""
+    ) {
+
+        alert(
+            "⚔️ Votre réponse est attendue avant de poursuivre."
+        );
+
+        return;
+    }
+
+
+    /* ================================
+       INVITÉ ABSENT
+       
+       Après avoir répondu "Hélas"
+       à la question 1, on affiche
+       uniquement la question du nom.
+    ================================= */
+
+    if (
+        declined &&
+        currentQuestion === 0
+    ) {
+
+        currentQuestion = 1;
+
+        showQuestion();
+
+        return;
+    }
+
+
+    /* ================================
+       FIN POUR UN INVITÉ ABSENT
+       
+       Après le nom, on termine.
+    ================================= */
+
+    if (
+        declined &&
+        currentQuestion === 1
+    ) {
+
+        finishDecline();
+const data = {
+
+    presence:
+        answers[0] || "",
+
+    nom:
+        answers[1] || "",
+
+    compagnie: "",
+
+    enfants: "",
+
+    menu: "",
+
+    restrictions: "",
+
+    hebergement: "",
+
+    message: ""
+};
+        return;
+    }
+
+
+    /* ================================
+       DERNIÈRE QUESTION POUR
+       UN INVITÉ PRÉSENT
+    ================================= */
+
+    if (
+        currentQuestion ===
+        questions.length - 1
+    ) {
+
+        finishQuest();
+
+        return;
+    }
+
+
+    /* ================================
+       QUESTION SUIVANTE
+    ================================= */
+
+    currentQuestion++;
+
+    showQuestion();
+}
 
     const currentAnswer =
         answers[currentQuestion];
