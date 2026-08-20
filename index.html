@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Julie & Loïc — Le Royaume vous convie</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=MedievalSharp&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- INTRODUCTION -->
+
+        <section id="intro" class="screen active">
+
+            <div class="ornament">✦</div>
+
+            <p class="small-title">Oyez, oyez, nobles voyageurs</p>
+
+            <h1>Julie <span>&</span> Loïc</h1>
+
+            <div class="divider">⚔ ✦ ⚔</div>
+
+            <p class="invitation">
+                Le Royaume vous convie à célébrer
+                l'union de deux âmes destinées à parcourir
+                ensemble les chemins de la vie.
+            </p>
+
+            <div class="date">
+                <span>19</span>
+                <strong>JUILLET</strong>
+                <span>2027</span>
+            </div>
+
+            <p class="location">
+                🏰 Maresville
+            </p>
+
+            <p class="intro-text">
+                Votre présence est attendue pour partager
+                cette journée de fête, de banquet et de réjouissances.
+            </p>
+
+            <button class="main-button" onclick="startQuest()">
+                ⚔️ Répondre à l'invitation ⚔️
+            </button>
+
+        </section>
+
+
+        <!-- QUESTIONNAIRE -->
+
+        <section id="questionnaire" class="screen">
+
+            <div class="quest-header">
+
+                <p class="small-title">Les chroniques du Royaume</p>
+
+                <div class="progress-container">
+                    <div id="progress-bar"></div>
+                </div>
+
+                <p id="progress-text">Question 1 / 8</p>
+
+            </div>
+
+
+            <div id="question-container">
+
+                <!-- Les questions seront générées automatiquement ici -->
+
+            </div>
+
+
+            <div class="navigation">
+
+                <button id="previous-button"
+                        class="secondary-button"
+                        onclick="previousQuestion()">
+                    ← Retour
+                </button>
+
+                <button id="next-button"
+                        class="main-button"
+                        onclick="nextQuestion()">
+                    Continuer →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FIN -->
+
+        <section id="success" class="screen">
+
+            <div class="ornament">✦</div>
+
+            <p class="small-title">Les chroniques sont scellées</p>
+
+            <h2>Votre réponse a été enregistrée</h2>
+
+            <div class="divider">⚔ ✦ ⚔</div>
+
+            <p class="success-text">
+                Merci d'avoir répondu à l'appel de Julie & Loïc.
+            </p>
+
+            <p class="success-text">
+                Nous vous attendons le
+                <strong>19 juillet 2027</strong>
+                à <strong>Maresville</strong>.
+            </p>
+
+            <div class="seal">
+                ⚔
+                <span>SCELLÉ</span>
+                ⚔
+            </div>
+
+            <p class="final-message">
+                Que votre voyage jusqu'au Royaume soit sûr,
+                et que le banquet soit digne des plus grandes légendes.
+            </p>
+
+            <p class="final-signature">
+                ✦ Julie & Loïc ✦
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
