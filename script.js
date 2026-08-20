@@ -19,7 +19,7 @@ const questions = [
 
         answers: [
             "⚔️ Oui, je réponds présent(e) !",
-            "🕯️ Hélas, je ne pourrai être des nôtres."
+            "🕯️ Hélas, je ne pourrai être des vôtres."
         ]
     },
 
