@@ -1,621 +1,1527 @@
-/* ================================
-   GENERAL
-================================ */
+/* =========================================
+   POLICES
+========================================= */
+
+:root {
+
+    --parchment-light: #e7c98d;
+    --parchment: #d5b36f;
+    --parchment-dark: #9c7540;
+
+    --ink: #24170f;
+    --ink-soft: #4b3020;
+
+    --red: #701d19;
+    --red-dark: #42110e;
+    --red-light: #9c3b30;
+
+    --gold: #b88932;
+    --gold-light: #e2bd67;
+
+    --stone: #171311;
+    --stone-light: #2c2420;
+
+    --shadow:
+        rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================
+   RESET
+========================================= */
 
 * {
+
     box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
 }
+
 
 html {
-    scroll-behavior: smooth;
+
+    min-height: 100%;
+
 }
+
 
 body {
-    margin: 0;
+
     min-height: 100vh;
 
-    background:
-        radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 60%),
-        linear-gradient(135deg, #15120e, #292116, #100e0b);
+    font-family:
+        "Crimson Text",
+        Georgia,
+        serif;
 
-    color: #eadbb8;
+    color: var(--ink);
 
-    font-family: "Libre Baskerville", serif;
+    overflow-x: hidden;
+
 }
 
 
-/* ================================
-   PAGE
-================================ */
+/* =========================================
+   FOND PIERRE
+========================================= */
 
-.page {
+.stone-background {
+
     min-height: 100vh;
 
     display: flex;
-    justify-content: center;
+
     align-items: center;
 
-    padding: 30px 15px;
+    justify-content: center;
+
+    padding: 35px 15px;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 30%,
+            #42352e 0%,
+            #251f1b 35%,
+            #11100f 100%
+        );
 
     position: relative;
-}
-
-.page::before {
-    content: "";
-
-    position: fixed;
-    inset: 12px;
-
-    border: 1px solid rgba(192, 154, 78, 0.35);
-
-    pointer-events: none;
-}
-
-
-/* ================================
-   SCREENS
-================================ */
-
-.screen {
-    display: none;
-
-    width: 100%;
-    max-width: 720px;
-
-    min-height: 600px;
-
-    padding: 50px 40px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            rgba(54, 42, 27, 0.94),
-            rgba(30, 24, 17, 0.97)
-        );
-
-    border: 2px solid #9d7a3e;
-
-    box-shadow:
-        0 0 0 8px rgba(0,0,0,0.2),
-        0 20px 70px rgba(0,0,0,0.7);
-
-    position: relative;
-}
-
-.screen::before,
-.screen::after {
-    content: "✦";
-
-    position: absolute;
-
-    color: #c5a35a;
-
-    font-size: 28px;
-}
-
-.screen::before {
-    top: 15px;
-    left: 20px;
-}
-
-.screen::after {
-    bottom: 15px;
-    right: 20px;
-}
-
-.screen.active {
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    animation: fadeIn 0.7s ease;
-}
-
-
-/* ================================
-   TYPOGRAPHY
-================================ */
-
-.small-title {
-    font-family: "MedievalSharp", cursive;
-
-    color: #c7a65b;
-
-    font-size: 18px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 25px;
-}
-
-h1 {
-    margin: 0;
-
-    font-family: "Cinzel", serif;
-
-    font-size: clamp(42px, 8vw, 72px);
-
-    color: #e4c77d;
-
-    letter-spacing: 4px;
-
-    text-shadow: 0 4px 10px rgba(0,0,0,0.7);
-}
-
-h1 span {
-    font-family: "MedievalSharp", cursive;
-
-    font-size: 0.7em;
-
-    color: #b89245;
-}
-
-h2 {
-    font-family: "Cinzel", serif;
-
-    color: #e4c77d;
-
-    font-size: clamp(27px, 5vw, 40px);
-
-    margin: 15px 0 25px;
-}
-
-.divider {
-    margin: 25px 0;
-
-    color: #b99248;
-
-    letter-spacing: 8px;
-
-    font-size: 18px;
-}
-
-.invitation {
-    max-width: 560px;
-
-    margin: 0 auto;
-
-    line-height: 1.9;
-
-    font-size: 17px;
-}
-
-.intro-text {
-    line-height: 1.8;
-
-    font-size: 14px;
-
-    color: #c7baa0;
-
-    max-width: 500px;
-
-    margin: 20px auto 30px;
-}
-
-
-/* ================================
-   DATE
-================================ */
-
-.date {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 18px;
-
-    margin: 30px 0;
-
-    font-family: "Cinzel", serif;
-
-    color: #d8bb72;
-}
-
-.date span {
-    font-size: 26px;
-}
-
-.date strong {
-    font-size: 25px;
-
-    letter-spacing: 4px;
-}
-
-.location {
-    font-family: "Cinzel", serif;
-
-    font-size: 20px;
-
-    color: #dfc88f;
-}
-
-
-/* ================================
-   BUTTONS
-================================ */
-
-button {
-    font-family: "Cinzel", serif;
-
-    cursor: pointer;
-
-    transition: all 0.25s ease;
-}
-
-.main-button {
-    display: inline-block;
-
-    border: 1px solid #c19b4e;
-
-    background:
-        linear-gradient(
-            180deg,
-            #6e5328,
-            #3d2d16
-        );
-
-    color: #f1dfad;
-
-    padding: 16px 25px;
-
-    font-size: 15px;
-
-    letter-spacing: 1px;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.4);
-
-    margin: 10px auto;
-}
-
-.main-button:hover {
-    transform: translateY(-2px);
-
-    background:
-        linear-gradient(
-            180deg,
-            #85652f,
-            #503b1e
-        );
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.6);
-}
-
-.secondary-button {
-    border: 1px solid #705a35;
-
-    background: transparent;
-
-    color: #bbae94;
-
-    padding: 13px 20px;
-
-    font-size: 14px;
-}
-
-.secondary-button:hover {
-    background: rgba(255,255,255,0.05);
-}
-
-
-/* ================================
-   QUESTIONS
-================================ */
-
-#question-container {
-    flex: 1;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-}
-
-.question-number {
-    color: #a9894b;
-
-    font-family: "Cinzel", serif;
-
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 15px;
-}
-
-.question-title {
-    font-family: "Cinzel", serif;
-
-    color: #e3c67d;
-
-    font-size: clamp(23px, 5vw, 32px);
-
-    line-height: 1.4;
-
-    margin-bottom: 30px;
-}
-
-
-/* ================================
-   ANSWERS
-================================ */
-
-.answers {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 12px;
-
-    width: 100%;
-
-    max-width: 520px;
-
-    margin: 0 auto;
-}
-
-.answer-button {
-    width: 100%;
-
-    padding: 17px 20px;
-
-    border: 1px solid #806632;
-
-    background: rgba(20, 16, 11, 0.6);
-
-    color: #e2d4b6;
-
-    font-family: "Libre Baskerville", serif;
-
-    font-size: 15px;
-
-    text-align: left;
-}
-
-.answer-button:hover {
-    border-color: #c7a65b;
-
-    background: rgba(117, 88, 39, 0.25);
-
-    transform: translateX(4px);
-}
-
-.answer-button.selected {
-    background: rgba(141, 105, 45, 0.45);
-
-    border-color: #d0ae62;
-
-    color: #f4dda0;
-
-    box-shadow:
-        inset 0 0 15px rgba(201, 164, 82, 0.1);
-}
-
-
-/* ================================
-   TEXT INPUT
-================================ */
-
-.text-input {
-    width: 100%;
-
-    max-width: 520px;
-
-    margin: 0 auto;
-
-    min-height: 110px;
-
-    padding: 15px;
-
-    resize: vertical;
-
-    background: rgba(10, 8, 5, 0.6);
-
-    border: 1px solid #806632;
-
-    color: #eadbb8;
-
-    font-family: "Libre Baskerville", serif;
-
-    font-size: 15px;
-
-    outline: none;
-}
-
-.text-input:focus {
-    border-color: #c7a65b;
-}
-
-
-/* ================================
-   NAVIGATION
-================================ */
-
-.navigation {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-top: 30px;
-}
-
-
-/* ================================
-   PROGRESS
-================================ */
-
-.quest-header {
-    margin-bottom: 10px;
-}
-
-.progress-container {
-    width: 100%;
-
-    height: 6px;
-
-    background: rgba(0,0,0,0.5);
-
-    border: 1px solid #5b4827;
 
     overflow: hidden;
 }
 
-#progress-bar {
-    width: 12.5%;
 
-    height: 100%;
+/* Texture pierre */
 
-    background: #b08a43;
+.stone-background::before {
 
-    transition: width 0.4s ease;
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.18;
+
+    background-image:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 38px,
+            rgba(255,255,255,.08) 39px,
+            transparent 40px
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 72px,
+            rgba(0,0,0,.35) 73px,
+            transparent 75px
+        );
+
 }
 
-#progress-text {
-    color: #9e9179;
 
-    font-size: 12px;
+/* =========================================
+   ÉCRANS
+========================================= */
 
-    margin-top: 8px;
+.screen {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    display: none;
+
+    position: relative;
+
+    z-index: 2;
+
 }
 
 
-/* ================================
-   SUCCESS
-================================ */
+.screen.active {
 
-.success-text {
-    line-height: 1.9;
+    display: block;
 
-    max-width: 520px;
+    animation:
+        appear
+        .7s
+        ease;
 
-    margin: 10px auto;
 }
 
-.success-text strong {
-    color: #d5b66c;
+
+@keyframes appear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(.985);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
 }
 
-.seal {
-    width: 130px;
 
-    height: 130px;
+/* =========================================
+   PARCHMENT
+========================================= */
 
-    margin: 30px auto;
+.parchment {
 
-    border: 3px double #b08b47;
+    position: relative;
+
+    width: 100%;
+
+    min-height: 650px;
+
+    padding:
+        65px
+        70px
+        55px;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            rgba(255,245,210,.55),
+            transparent 65%
+        ),
+
+        linear-gradient(
+            135deg,
+            #d4b274,
+            #ecd49c 45%,
+            #c19a5c
+        );
+
+    border:
+        2px solid
+        #76502d;
+
+    box-shadow:
+
+        0 25px 70px
+        rgba(0,0,0,.65),
+
+        inset 0 0 70px
+        rgba(72,40,15,.35),
+
+        inset 0 0 15px
+        rgba(0,0,0,.3);
+
+}
+
+
+/* Bords déchirés */
+
+.parchment::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 12px;
+
+    border:
+        1px solid
+        rgba(70,40,15,.45);
+
+    pointer-events: none;
+
+}
+
+
+.parchment::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            ellipse at top left,
+            rgba(60,30,10,.28),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at bottom right,
+            rgba(60,30,10,.3),
+            transparent 40%
+        );
+
+}
+
+
+/* =========================================
+   MONOGRAMME
+========================================= */
+
+.monogram {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-bottom: 10px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 48px;
+
+    font-weight: 600;
+
+    color: #6b2118;
+
+    text-shadow:
+        1px 1px 0 #e9cf98;
+
+}
+
+
+.monogram.small {
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.sword {
+
+    font-size: 38px;
+
+    color: #4b2b18;
+
+    transform:
+        rotate(0deg);
+
+}
+
+
+.monogram.small .sword {
+
+    font-size: 25px;
+
+}
+
+
+/* =========================================
+   SCEAU DE CIRE
+========================================= */
+
+.wax-seal {
+
+    position: absolute;
+
+    z-index: 10;
+
+    top: 35px;
+
+    right: 45px;
+
+    width: 100px;
+
+    height: 100px;
 
     border-radius: 50%;
 
     display: flex;
 
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            #bd4d3e,
+            #751912 55%,
+            #3d0c09
+        );
+
+    border:
+        4px solid
+        #681510;
+
+    box-shadow:
+
+        3px 6px 12px
+        rgba(0,0,0,.45),
+
+        inset 4px 4px 7px
+        rgba(255,255,255,.15),
+
+        inset -5px -6px 8px
+        rgba(0,0,0,.4);
+
+    transform:
+        rotate(5deg);
+
+}
+
+
+.wax-seal::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: -17px;
+
+    left: 14px;
+
+    width: 22px;
+
+    height: 30px;
+
+    background: #681510;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            80% 100%,
+            50% 70%,
+            25% 100%
+        );
+
+}
+
+
+.paw {
+
+    font-size: 38px;
+
+    filter:
+        sepia(1)
+        brightness(1.5);
+
+}
+
+
+.small-seal {
+
+    width: 75px;
+
+    height: 75px;
+
+    top: 25px;
+
+    right: 30px;
+
+}
+
+
+.small-seal .paw {
+
+    font-size: 28px;
+
+}
+
+
+/* =========================================
+   TITRES
+========================================= */
+
+h1,
+h2 {
+
+    position: relative;
+
+    z-index: 3;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    text-align: center;
+
+    color: #28170e;
+
+}
+
+
+h1 {
+
+    font-size:
+        clamp(
+            38px,
+            6vw,
+            68px
+        );
+
+    line-height: 1.12;
+
+    letter-spacing:
+        2px;
+
+    margin-top: 8px;
+
+    text-shadow:
+        1px 1px 0
+        rgba(255,235,185,.5);
+
+}
+
+
+.questionnaire-title {
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            44px
+        );
+
+}
+
+
+h2 {
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            52px
+        );
+
+    line-height: 1.2;
+
+}
+
+
+/* =========================================
+   TEXTES
+========================================= */
+
+.intro-text {
+
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 650px;
+
+    margin:
+        25px auto;
+
+    text-align: center;
+
+    font-size: 23px;
+
+    line-height: 1.5;
+
+    color: var(--ink-soft);
+
+}
+
+
+.subtitle {
+
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 700px;
+
+    margin:
+        10px auto 18px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    color: var(--ink-soft);
+
+}
+
+
+.date {
+
+    position: relative;
+
+    z-index: 3;
+
+    text-align: center;
+
+    margin-top: 35px;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    color: #5b241a;
+
+    letter-spacing: 2px;
+
+}
+
+
+.date span {
+
+    font-family:
+        "Crimson Text",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   DÉCORATION
+========================================= */
+
+.laurel {
+
+    position: relative;
+
+    z-index: 3;
+
+    text-align: center;
+
+    color: #704522;
+
+    font-size: 20px;
+
+    margin:
+        5px auto 10px;
+
+    opacity: .8;
+
+}
+
+
+.ornament-line {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    max-width: 700px;
+
+    margin:
+        28px auto;
+
+    color: #6b3c20;
+
+}
+
+
+.ornament-line span {
+
+    height: 1px;
+
+    flex: 1;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #704522,
+            transparent
+        );
+
+}
+
+
+.ornament {
+
+    position: relative;
+
+    z-index: 3;
+
+    text-align: center;
+
+    font-size: 32px;
+
+    color: #751912;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================================
+   BOUTON PRINCIPAL
+========================================= */
+
+.main-button {
+
+    position: relative;
+
+    z-index: 5;
+
+    display: block;
+
+    margin:
+        35px auto
+        0;
+
+    padding:
+        18px 35px;
+
+    min-width: 340px;
+
+    border:
+        2px solid
+        #3e120e;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #8e2a21,
+            #5e1613
+        );
+
+    color: #f6dfaa;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    letter-spacing:
+        .7px;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 8px 18px
+        rgba(0,0,0,.4),
+
+        inset 0 1px 0
+        rgba(255,255,255,.2);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+
+}
+
+
+.main-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #a13b2f,
+            #6f1c17
+        );
+
+    box-shadow:
+
+        0 12px 25px
+        rgba(0,0,0,.5),
+
+        0 0 20px
+        rgba(183,130,45,.25);
+
+}
+
+
+.button-icon {
+
+    margin:
+        0 10px;
+
+    color:
+        #e5bd68;
+
+}
+
+
+/* =========================================
+   QUESTIONNAIRE
+========================================= */
+
+.questionnaire-card {
+
+    min-height: 720px;
+
+    padding-top: 55px;
+
+}
+
+
+.question-container {
+
+    position: relative;
+
+    z-index: 3;
+
+    text-align: center;
+
+    max-width: 850px;
+
+    margin:
+        0 auto;
+
+}
+
+
+.question-number {
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    letter-spacing:
+        2px;
+
+    color:
+        #791e17;
+
+    margin-top: 15px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.question-title {
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            25px,
+            4vw,
+            39px
+        );
+
+    line-height: 1.35;
+
+    color:
+        #24160d;
+
+    max-width: 800px;
+
+    margin:
+        0 auto 35px;
+
+}
+
+
+/* =========================================
+   RÉPONSES
+========================================= */
+
+.answers {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(
+                240px,
+                1fr
+            )
+        );
+
+    gap: 20px;
+
+    margin:
+        25px auto;
+
+}
+
+
+.answer-button {
+
+    min-height: 100px;
+
+    padding:
+        18px;
+
+    border:
+        2px solid
+        #6e4a27;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e2c88d,
+            #caa566
+        );
+
+    color:
+        #2b1a0f;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 7px 15px
+        rgba(0,0,0,.25),
+
+        inset 0 1px 0
+        rgba(255,255,255,.35);
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.answer-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #8c2c23;
+
+    box-shadow:
+
+        0 10px 20px
+        rgba(0,0,0,.3);
+
+}
+
+
+.answer-button.selected {
+
+    color:
+        #f5dfaa;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #8e2a21,
+            #5d1512
+        );
+
+    border-color:
+        #4a0e0b;
+
+    box-shadow:
+
+        0 8px 20px
+        rgba(80,15,10,.4),
+
+        inset 0 0 15px
+        rgba(0,0,0,.25);
+
+}
+
+
+/* =========================================
+   CHAMP TEXTE
+========================================= */
+
+.text-input {
+
+    position: relative;
+
+    z-index: 3;
+
+    display: block;
+
+    width: 100%;
+
+    min-height: 130px;
+
+    resize: vertical;
+
+    padding: 18px;
+
+    border:
+        2px solid
+        #79542d;
+
+    outline: none;
+
+    background:
+        rgba(244,221,169,.72);
+
+    color:
+        #2b1a0f;
+
+    font-family:
+        "Crimson Text",
+        Georgia,
+        serif;
+
+    font-size: 20px;
+
+    box-shadow:
+        inset 0 4px 15px
+        rgba(70,40,10,.15);
+
+}
+
+
+.text-input:focus {
+
+    border-color:
+        #8d2a20;
+
+    box-shadow:
+
+        inset 0 4px 15px
+        rgba(70,40,10,.15),
+
+        0 0 0 3px
+        rgba(125,30,23,.12);
+
+}
+
+
+.text-input::placeholder {
+
+    color:
+        #745535;
+
+    opacity:
+        .75;
+
+}
+
+
+/* =========================================
+   PROGRESSION
+========================================= */
+
+.progress-section {
+
+    position: relative;
+
+    z-index: 3;
+
+    margin:
+        45px auto 25px;
+
+    max-width: 750px;
+
+}
+
+
+.progress-bar-wrapper {
+
+    height: 12px;
+
+    border:
+        1px solid
+        #62401e;
+
+    background:
+        rgba(88,60,30,.3);
+
+    padding: 2px;
+
+    position: relative;
+
+}
+
+
+.progress-bar-wrapper::before,
+.progress-bar-wrapper::after {
+
+    content: "◆";
+
+    position: absolute;
+
+    top: -7px;
+
+    color:
+        #74441e;
+
+    font-size: 18px;
+
+}
+
+
+.progress-bar-wrapper::before {
+
+    left: -13px;
+
+}
+
+
+.progress-bar-wrapper::after {
+
+    right: -13px;
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 12%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #651812,
+            #a43a2e
+        );
+
+    transition:
+        width .4s ease;
+
+}
+
+
+.progress-text {
+
+    margin-top: 10px;
+
+    text-align: center;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    color:
+        #681d16;
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.navigation {
+
+    position: relative;
+
+    z-index: 4;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+}
+
+
+.nav-button {
+
+    padding:
+        14px 25px;
+
+    border:
+        1px solid
+        #69451f;
+
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        all .25s ease;
+
+}
+
+
+.previous {
+
+    background:
+        rgba(201,163,98,.5);
+
+    color:
+        #422816;
+
+}
+
+
+.previous:hover {
+
+    background:
+        rgba(201,163,98,.8);
+
+}
+
+
+.next {
+
+    background:
+        #701d18;
+
+    color:
+        #f4dca5;
+
+    border-color:
+        #4d100d;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.25);
+
+}
+
+
+.next:hover {
+
+    background:
+        #8d2b22;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.nav-button:disabled {
+
+    opacity: .6;
+
+    cursor:
+        wait;
+
+}
+
+
+/* =========================================
+   MESSAGE FINAL
+========================================= */
+
+.success-card {
+
+    min-height: 650px;
+
+    display: flex;
+
     flex-direction: column;
 
     justify-content: center;
 
     align-items: center;
 
-    color: #c4a35c;
+    text-align: center;
 
-    font-family: "Cinzel", serif;
 }
 
-.seal span {
-    font-size: 13px;
 
-    letter-spacing: 3px;
+.success-text {
 
-    margin: 7px 0;
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 650px;
+
+    margin:
+        12px auto;
+
+    font-size: 22px;
+
+    line-height: 1.5;
+
+    color:
+        #4a3020;
+
 }
+
 
 .final-message {
-    color: #bfb19a;
 
-    font-size: 14px;
+    position: relative;
 
-    line-height: 1.8;
+    z-index: 3;
+
+    margin-top: 35px;
+
+    font-size: 19px;
+
+    font-style: italic;
+
 }
+
 
 .final-signature {
-    margin-top: 25px;
 
-    font-family: "MedievalSharp", cursive;
+    position: relative;
 
-    font-size: 24px;
+    z-index: 3;
 
-    color: #d3b56c;
-}
+    margin-top: 10px;
 
+    font-family:
+        "Cinzel",
+        Georgia,
+        serif;
 
-/* ================================
-   ANIMATION
-================================ */
+    font-size: 22px;
 
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-
-        transform: translateY(0);
-    }
+    color:
+        #711d17;
 
 }
 
 
-/* ================================
-   MOBILE
-================================ */
+/* =========================================
+   RESPONSIVE
+========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .page {
-        padding: 15px;
+    .stone-background {
+
+        padding:
+            10px;
+
+        align-items:
+            flex-start;
+
     }
 
-    .page::before {
-        inset: 6px;
+
+    .parchment {
+
+        min-height:
+            calc(100vh - 20px);
+
+        padding:
+            60px 25px 35px;
+
     }
 
-    .screen {
-        min-height: calc(100vh - 30px);
 
-        padding: 40px 22px;
+    .wax-seal {
+
+        width: 72px;
+
+        height: 72px;
+
+        top: 20px;
+
+        right: 18px;
+
     }
 
-    .date {
-        gap: 10px;
+
+    .wax-seal .paw {
+
+        font-size: 28px;
+
     }
 
-    .date span {
-        font-size: 20px;
+
+    .small-seal {
+
+        width: 55px;
+
+        height: 55px;
+
+        top: 15px;
+
+        right: 12px;
+
     }
 
-    .date strong {
+
+    .small-seal .paw {
+
+        font-size: 21px;
+
+    }
+
+
+    .monogram {
+
+        font-size: 35px;
+
+        gap: 12px;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            clamp(
+                31px,
+                10vw,
+                48px
+            );
+
+    }
+
+
+    .questionnaire-title {
+
+        font-size:
+            29px;
+
+    }
+
+
+    .intro-text {
+
         font-size: 19px;
+
     }
+
+
+    .question-title {
+
+        font-size: 24px;
+
+    }
+
+
+    .answers {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .answer-button {
+
+        min-height:
+            85px;
+
+        font-size:
+            16px;
+
+    }
+
+
+    .main-button {
+
+        min-width:
+            auto;
+
+        width:
+            100%;
+
+        font-size:
+            15px;
+
+    }
+
 
     .navigation {
-        flex-direction: column-reverse;
+
+        flex-direction:
+            column-reverse;
+
     }
 
-    .navigation button {
+
+    .nav-button {
+
         width: 100%;
+
+    }
+
+
+    .success-text {
+
+        font-size: 19px;
+
     }
 
 }
