@@ -1,149 +1,405 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Julie & Loïc — Le Royaume vous convie</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        Julie & Loïc — Répondez à l'invitation
+    </title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=MedievalSharp&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <div class="page">
 
-        <!-- INTRODUCTION -->
+    <!-- =====================================
+         FOND
+    ====================================== -->
 
-        <section id="intro" class="screen active">
-
-            <div class="ornament">✦</div>
-
-            <p class="small-title">Oyez, oyez, nobles voyageurs</p>
-
-            <h1>Julie <span>&</span> Loïc</h1>
-
-            <div class="divider">⚔ ✦ ⚔</div>
-
-            <p class="invitation">
-                Le Royaume vous convie à célébrer
-                l'union de deux âmes destinées à parcourir
-                ensemble les chemins de la vie.
-            </p>
-
-            <div class="date">
-                <span>19</span>
-                <strong>JUILLET</strong>
-                <span>2027</span>
-            </div>
-
-            <p class="location">
-                🏰 Maresville
-            </p>
-
-            <p class="intro-text">
-                Votre présence est attendue pour partager
-                cette journée de fête, de banquet et de réjouissances.
-            </p>
-
-            <button class="main-button" onclick="startQuest()">
-                ⚔️ Répondre à l'invitation ⚔️
-            </button>
-
-        </section>
+    <div class="stone-background">
 
 
-        <!-- QUESTIONNAIRE -->
+        <!-- =================================
+             INTRODUCTION
+        ================================== -->
 
-        <section id="questionnaire" class="screen">
+        <main
+            id="intro"
+            class="screen active"
+        >
 
-            <div class="quest-header">
+            <section class="parchment">
 
-                <p class="small-title">Les chroniques du Royaume</p>
 
-                <div class="progress-container">
-                    <div id="progress-bar"></div>
+                <!-- Sceau de cire -->
+
+                <div class="wax-seal">
+
+                    <div class="paw">
+
+                        🐾
+
+                    </div>
+
                 </div>
 
-                <p id="progress-text">Question 1 / 8</p>
 
-            </div>
+                <!-- Monogramme -->
+
+                <div class="monogram">
+
+                    <span>J</span>
+
+                    <div class="sword">
+
+                        ⚔
+
+                    </div>
+
+                    <span>L</span>
+
+                </div>
 
 
-            <div id="question-container">
+                <!-- Décoration -->
 
-                <!-- Les questions seront générées automatiquement ici -->
+                <div class="laurel">
 
-            </div>
+                    ❧ ───────── ❧
+
+                </div>
 
 
-            <div class="navigation">
+                <h1>
 
-                <button id="previous-button"
-                        class="secondary-button"
-                        onclick="previousQuestion()">
-                    ← Retour
+                    RÉPONDEZ À
+                    <br>
+                    L'INVITATION
+
+                </h1>
+
+
+                <p class="intro-text">
+
+                    Julie & Loïc vous convient
+                    à célébrer leur union
+
+                    <br>
+
+                    lors d'une journée mémorable.
+
+                </p>
+
+
+                <div class="ornament-line">
+
+                    <span></span>
+                    ◆
+                    <span></span>
+
+                </div>
+
+
+                <button
+                    class="main-button"
+                    onclick="startQuest()"
+                >
+
+                    <span class="button-icon">
+                        ⚔
+                    </span>
+
+                    Répondre à l'invitation
+
+                    <span class="button-icon">
+                        ⚔
+                    </span>
+
                 </button>
 
-                <button id="next-button"
-                        class="main-button"
-                        onclick="nextQuestion()">
-                    Continuer →
-                </button>
 
-            </div>
+                <p class="date">
 
-        </section>
+                    19 · 07 · 2027
+                    <br>
+                    <span>
+                        Maresville
+                    </span>
+
+                </p>
 
 
-        <!-- FIN -->
+            </section>
 
-        <section id="success" class="screen">
+        </main>
 
-            <div class="ornament">✦</div>
 
-            <p class="small-title">Les chroniques sont scellées</p>
 
-            <h2>Votre réponse a été enregistrée</h2>
+        <!-- =====================================
+             QUESTIONNAIRE
+        ====================================== -->
 
-            <div class="divider">⚔ ✦ ⚔</div>
+        <main
+            id="questionnaire"
+            class="screen"
+        >
 
-            <p class="success-text">
-                Merci d'avoir répondu à l'appel de Julie & Loïc.
-            </p>
+            <section class="parchment questionnaire-card">
 
-            <p class="success-text">
-                Nous vous attendons le
-                <strong>19 juillet 2027</strong>
-                à <strong>Maresville</strong>.
-            </p>
 
-            <div class="seal">
-                ⚔
-                <span>SCELLÉ</span>
-                ⚔
-            </div>
+                <!-- En-tête -->
 
-            <p class="final-message">
-                Que votre voyage jusqu'au Royaume soit sûr,
-                et que le banquet soit digne des plus grandes légendes.
-            </p>
+                <div class="monogram small">
 
-            <p class="final-signature">
-                ✦ Julie & Loïc ✦
-            </p>
+                    <span>J</span>
 
-        </section>
+                    <div class="sword">
+                        ⚔
+                    </div>
+
+                    <span>L</span>
+
+                </div>
+
+
+                <div class="wax-seal small-seal">
+
+                    <div class="paw">
+                        🐾
+                    </div>
+
+                </div>
+
+
+                <h1 class="questionnaire-title">
+
+                    RÉPONDEZ À
+                    <br>
+                    L'INVITATION
+
+                </h1>
+
+
+                <p class="subtitle">
+
+                    Julie & Loïc vous convient à célébrer
+                    leur union lors d'une journée mémorable.
+
+                </p>
+
+
+                <div class="ornament-line">
+
+                    <span></span>
+                    ◆
+                    <span></span>
+
+                </div>
+
+
+                <!-- Zone dynamique -->
+
+                <div
+                    id="question-container"
+                    class="question-container"
+                >
+
+                </div>
+
+
+                <!-- Progression -->
+
+                <div class="progress-section">
+
+                    <div class="progress-bar-wrapper">
+
+                        <div
+                            id="progress-bar"
+                            class="progress-bar"
+                        ></div>
+
+                    </div>
+
+
+                    <div
+                        id="progress-text"
+                        class="progress-text"
+                    >
+
+                        Question 1 / 8
+
+                    </div>
+
+                </div>
+
+
+                <!-- Navigation -->
+
+                <div class="navigation">
+
+                    <button
+                        id="previous-button"
+                        class="nav-button previous"
+                        onclick="previousQuestion()"
+                    >
+
+                        ← Retour
+
+                    </button>
+
+
+                    <button
+                        id="next-button"
+                        class="nav-button next"
+                        onclick="nextQuestion()"
+                    >
+
+                        Continuer →
+
+                    </button>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+
+
+        <!-- =====================================
+             MESSAGE FINAL
+        ====================================== -->
+
+        <main
+            id="success"
+            class="screen"
+        >
+
+            <section class="parchment success-card">
+
+
+                <div class="wax-seal">
+
+                    <div class="paw">
+                        🐾
+                    </div>
+
+                </div>
+
+
+                <div class="monogram">
+
+                    <span>J</span>
+
+                    <div class="sword">
+                        ⚔
+                    </div>
+
+                    <span>L</span>
+
+                </div>
+
+
+                <div class="ornament">
+
+                    ✦
+
+                </div>
+
+
+                <h2>
+
+                    Votre réponse a été scellée
+
+                </h2>
+
+
+                <div class="ornament-line">
+
+                    <span></span>
+                    ◆
+                    <span></span>
+
+                </div>
+
+
+                <p class="success-text">
+
+                    Merci d'avoir répondu à notre invitation.
+
+                </p>
+
+
+                <p class="success-text">
+
+                    Nous avons hâte de partager
+                    cette journée avec vous.
+
+                </p>
+
+
+                <p class="final-message">
+
+                    Avec toute notre affection,
+
+                </p>
+
+
+                <p class="final-signature">
+
+                    ✦ Julie & Loïc ✦
+
+                </p>
+
+
+            </section>
+
+        </main>
+
 
     </div>
 
 
-    <script src="script.js"></script>
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script
+        src="script.js"
+        defer
+    ></script>
+
 
 </body>
+
 </html>
