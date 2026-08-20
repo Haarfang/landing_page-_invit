@@ -19,7 +19,7 @@ const questions = [
 
         answers: [
             "⚔️ Oui, je réponds présent(e) !",
-            "🕯️ Hélas, je ne pourrai être des vôtres."
+            "🕯️ Hélas, je ne pourrai être des nôtres."
         ]
     },
 
@@ -65,6 +65,7 @@ const questions = [
         answers: [
             "🍖 Menu classique",
             "🌿 Menu végétarien",
+            "🥕 Menu végétalien",
             "🧒 Menu enfant",
             "📜 Autre / besoin particulier"
         ]
@@ -106,7 +107,9 @@ const questions = [
 ========================================= */
 
 let currentQuestion = 0;
+
 let answers = [];
+
 let declined = false;
 
 
@@ -164,6 +167,18 @@ function startQuest() {
 ========================================= */
 
 function showQuestion() {
+
+    /*
+       Pour un invité qui ne vient pas,
+       on n'utilise que les deux premières
+       questions :
+
+       Question 1 = présence
+       Question 2 = prénom + nom
+
+       Pour un invité présent, toutes les
+       questions normales restent disponibles.
+    */
 
     const question =
         questions[currentQuestion];
@@ -228,6 +243,11 @@ function showQuestion() {
                 answer;
 
 
+            /*
+               Si une réponse avait déjà été
+               sélectionnée, on la conserve.
+            */
+
             if (
                 answers[currentQuestion] ===
                 answer
@@ -263,10 +283,10 @@ function showQuestion() {
                 );
 
 
-                /* -----------------------------
-                   DÉTECTION DE LA RÉPONSE
-                   "HÉLAS"
-                ----------------------------- */
+                /*
+                   Détection de la réponse
+                   "Hélas"
+                */
 
                 if (
                     currentQuestion === 0 &&
@@ -338,17 +358,42 @@ function showQuestion() {
        BARRE DE PROGRESSION
     --------------------------------------- */
 
+    /*
+       Pour un invité absent :
+
+       2 étapes seulement.
+
+       Pour un invité présent :
+
+       questionnaire complet.
+    */
+
+    let totalQuestions =
+        questions.length;
+
+    let displayedQuestion =
+        currentQuestion;
+
+
+    if (declined) {
+
+        totalQuestions = 2;
+
+    }
+
+
     const progress =
         (
-            (currentQuestion + 1)
-            / questions.length
+            (displayedQuestion + 1)
+            / totalQuestions
         ) * 100;
 
     progressBar.style.width =
         progress + "%";
 
+
     progressText.textContent =
-        `Question ${currentQuestion + 1} / ${questions.length}`;
+        `Question ${displayedQuestion + 1} / ${totalQuestions}`;
 
 
     /* ---------------------------------------
@@ -371,6 +416,12 @@ function showQuestion() {
        BOUTON SUIVANT
     --------------------------------------- */
 
+    /*
+       Invité absent :
+       sur la question du nom,
+       le bouton devient "Sceller".
+    */
+
     if (
         declined &&
         currentQuestion === 1
@@ -379,7 +430,15 @@ function showQuestion() {
         nextButton.textContent =
             "⚔️ Sceller ma réponse";
 
-    } else if (
+    }
+
+    /*
+       Invité présent :
+       dernière question normale.
+    */
+
+    else if (
+        !declined &&
         currentQuestion ===
         questions.length - 1
     ) {
@@ -387,11 +446,26 @@ function showQuestion() {
         nextButton.textContent =
             "⚔️ Sceller ma réponse";
 
-    } else {
+    }
+
+    /*
+       Dans tous les autres cas.
+    */
+
+    else {
 
         nextButton.textContent =
             "Continuer →";
     }
+
+
+    /*
+       On s'assure que le bouton est
+       réactivé lorsque l'on change
+       de question.
+    */
+
+    nextButton.disabled = false;
 }
 
 
@@ -406,7 +480,7 @@ function nextQuestion() {
 
 
     /* ---------------------------------------
-       VÉRIFICATION
+       VÉRIFICATION DE LA RÉPONSE
     --------------------------------------- */
 
     if (
@@ -425,8 +499,11 @@ function nextQuestion() {
     /* ---------------------------------------
        INVITÉ ABSENT
        
-       Après "Hélas", on affiche uniquement
-       la question du nom.
+       Après "Hélas" :
+
+       Question 1 → Question 2
+       
+       Question 2 → fin.
     --------------------------------------- */
 
     if (
@@ -441,12 +518,6 @@ function nextQuestion() {
         return;
     }
 
-
-    /* ---------------------------------------
-       INVITÉ ABSENT
-       
-       Après le nom, on termine.
-    --------------------------------------- */
 
     if (
         declined &&
@@ -466,6 +537,7 @@ function nextQuestion() {
     --------------------------------------- */
 
     if (
+        !declined &&
         currentQuestion ===
         questions.length - 1
     ) {
@@ -496,6 +568,17 @@ function previousQuestion() {
 
         currentQuestion--;
 
+        /*
+           Si l'invité revient à la première
+           question, on oublie le statut
+           "absent".
+        */
+
+        if (currentQuestion === 0) {
+
+            declined = false;
+        }
+
         showQuestion();
     }
 }
@@ -512,6 +595,15 @@ async function finishDecline() {
     nextButton.textContent =
         "🕯️ Transmission de votre réponse...";
 
+
+    /*
+       Données envoyées à Google Sheets.
+
+       presence = réponse à la question 1
+       nom      = réponse à la question 2
+
+       Les autres champs restent vides.
+    */
 
     const data = {
 
@@ -554,6 +646,10 @@ async function finishDecline() {
             }
         );
 
+
+        /* ---------------------------------
+           AFFICHAGE DU MESSAGE FINAL
+        --------------------------------- */
 
         questionnaire.classList.remove(
             "active"
@@ -636,7 +732,7 @@ async function finishDecline() {
 
 
 /* =========================================
-   ENVOI DES RÉPONSES
+   FIN POUR UN INVITÉ PRÉSENT
 ========================================= */
 
 async function finishQuest() {
@@ -646,6 +742,10 @@ async function finishQuest() {
     nextButton.textContent =
         "⚔️ Scellement en cours...";
 
+
+    /* ---------------------------------------
+       Préparation des données
+    --------------------------------------- */
 
     const data = {
 
@@ -694,6 +794,10 @@ async function finishQuest() {
             }
         );
 
+
+        /* ---------------------------------
+           Réponse envoyée
+        --------------------------------- */
 
         questionnaire.classList.remove(
             "active"
