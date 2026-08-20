@@ -106,9 +106,7 @@ const questions = [
 ========================================= */
 
 let currentQuestion = 0;
-
 let answers = [];
-
 let declined = false;
 
 
@@ -151,11 +149,11 @@ function startQuest() {
 
     questionnaire.classList.add("active");
 
-currentQuestion = 0;
+    currentQuestion = 0;
 
-answers = [];
+    answers = [];
 
-declined = false;
+    declined = false;
 
     showQuestion();
 }
@@ -173,6 +171,10 @@ function showQuestion() {
     questionContainer.innerHTML = "";
 
 
+    /* ---------------------------------------
+       NUMÉRO DE LA QUESTION
+    --------------------------------------- */
+
     const number =
         document.createElement("div");
 
@@ -184,6 +186,10 @@ function showQuestion() {
 
     questionContainer.appendChild(number);
 
+
+    /* ---------------------------------------
+       TITRE
+    --------------------------------------- */
 
     const title =
         document.createElement("div");
@@ -222,51 +228,61 @@ function showQuestion() {
                 answer;
 
 
-            if (answers[currentQuestion] === answer) {
+            if (
+                answers[currentQuestion] ===
+                answer
+            ) {
 
-                button.classList.add("selected");
-
+                button.classList.add(
+                    "selected"
+                );
             }
 
 
-button.onclick = function () {
+            button.onclick = function () {
 
-    answers[currentQuestion] =
-        answer;
-
-    document
-        .querySelectorAll(".answer-button")
-        .forEach(btn => {
-
-            btn.classList.remove(
-                "selected"
-            );
-
-        });
-
-    button.classList.add(
-        "selected"
-    );
+                answers[currentQuestion] =
+                    answer;
 
 
-    /* ================================
-       L'INVITÉ NE SERA PAS PRÉSENT
-    ================================= */
+                document
+                    .querySelectorAll(
+                        ".answer-button"
+                    )
+                    .forEach(btn => {
 
-    if (
-        currentQuestion === 0 &&
-        answer.includes("Hélas")
-    ) {
+                        btn.classList.remove(
+                            "selected"
+                        );
 
-        declined = true;
+                    });
 
-    } else if (currentQuestion === 0) {
 
-        declined = false;
+                button.classList.add(
+                    "selected"
+                );
 
-    }
 
-};
+                /* -----------------------------
+                   DÉTECTION DE LA RÉPONSE
+                   "HÉLAS"
+                ----------------------------- */
+
+                if (
+                    currentQuestion === 0 &&
+                    answer.includes("Hélas")
+                ) {
+
+                    declined = true;
+
+                } else if (
+                    currentQuestion === 0
+                ) {
+
+                    declined = false;
+                }
+
+            };
 
 
             answersContainer.appendChild(
@@ -323,8 +339,10 @@ button.onclick = function () {
     --------------------------------------- */
 
     const progress =
-        ((currentQuestion + 1)
-        / questions.length) * 100;
+        (
+            (currentQuestion + 1)
+            / questions.length
+        ) * 100;
 
     progressBar.style.width =
         progress + "%";
@@ -354,29 +372,26 @@ button.onclick = function () {
     --------------------------------------- */
 
     if (
+        declined &&
+        currentQuestion === 1
+    ) {
+
+        nextButton.textContent =
+            "⚔️ Sceller ma réponse";
+
+    } else if (
         currentQuestion ===
         questions.length - 1
     ) {
-if (
-    declined &&
-    currentQuestion === 1
-) {
 
-    nextButton.textContent =
-        "⚔️ Sceller ma réponse";
+        nextButton.textContent =
+            "⚔️ Sceller ma réponse";
 
-} else if (
-    currentQuestion ===
-    questions.length - 1
-) {
+    } else {
 
-    nextButton.textContent =
-        "⚔️ Sceller ma réponse";
-
-} else {
-
-    nextButton.textContent =
-        "Continuer →";
+        nextButton.textContent =
+            "Continuer →";
+    }
 }
 
 
@@ -390,9 +405,9 @@ function nextQuestion() {
         answers[currentQuestion];
 
 
-    /* ================================
-       VÉRIFICATION DE LA RÉPONSE
-    ================================= */
+    /* ---------------------------------------
+       VÉRIFICATION
+    --------------------------------------- */
 
     if (
         currentAnswer === undefined ||
@@ -407,13 +422,12 @@ function nextQuestion() {
     }
 
 
-    /* ================================
+    /* ---------------------------------------
        INVITÉ ABSENT
        
-       Après avoir répondu "Hélas"
-       à la question 1, on affiche
-       uniquement la question du nom.
-    ================================= */
+       Après "Hélas", on affiche uniquement
+       la question du nom.
+    --------------------------------------- */
 
     if (
         declined &&
@@ -428,11 +442,11 @@ function nextQuestion() {
     }
 
 
-    /* ================================
-       FIN POUR UN INVITÉ ABSENT
+    /* ---------------------------------------
+       INVITÉ ABSENT
        
        Après le nom, on termine.
-    ================================= */
+    --------------------------------------- */
 
     if (
         declined &&
@@ -440,34 +454,16 @@ function nextQuestion() {
     ) {
 
         finishDecline();
-const data = {
 
-    presence:
-        answers[0] || "",
-
-    nom:
-        answers[1] || "",
-
-    compagnie: "",
-
-    enfants: "",
-
-    menu: "",
-
-    restrictions: "",
-
-    hebergement: "",
-
-    message: ""
-};
         return;
     }
 
 
-    /* ================================
-       DERNIÈRE QUESTION POUR
-       UN INVITÉ PRÉSENT
-    ================================= */
+    /* ---------------------------------------
+       INVITÉ PRÉSENT
+       
+       Dernière question.
+    --------------------------------------- */
 
     if (
         currentQuestion ===
@@ -480,42 +476,9 @@ const data = {
     }
 
 
-    /* ================================
+    /* ---------------------------------------
        QUESTION SUIVANTE
-    ================================= */
-
-    currentQuestion++;
-
-    showQuestion();
-}
-
-    const currentAnswer =
-        answers[currentQuestion];
-
-
-    if (
-        currentAnswer === undefined ||
-        currentAnswer === ""
-    ) {
-
-        alert(
-            "⚔️ Votre réponse est attendue avant de poursuivre."
-        );
-
-        return;
-    }
-
-
-    if (
-        currentQuestion ===
-        questions.length - 1
-    ) {
-
-        finishQuest();
-
-        return;
-    }
-
+    --------------------------------------- */
 
     currentQuestion++;
 
@@ -524,7 +487,7 @@ const data = {
 
 
 /* =========================================
-   QUESTION PRECEDENTE
+   QUESTION PRÉCÉDENTE
 ========================================= */
 
 function previousQuestion() {
@@ -539,7 +502,141 @@ function previousQuestion() {
 
 
 /* =========================================
-   ENVOI DES REPONSES
+   FIN POUR UN INVITÉ ABSENT
+========================================= */
+
+async function finishDecline() {
+
+    nextButton.disabled = true;
+
+    nextButton.textContent =
+        "🕯️ Transmission de votre réponse...";
+
+
+    const data = {
+
+        presence:
+            answers[0] || "",
+
+        nom:
+            answers[1] || "",
+
+        compagnie: "",
+
+        enfants: "",
+
+        menu: "",
+
+        restrictions: "",
+
+        hebergement: "",
+
+        message: ""
+    };
+
+
+    try {
+
+        await fetch(
+            GOOGLE_SCRIPT_URL,
+            {
+                method: "POST",
+
+                mode: "no-cors",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify(data)
+            }
+        );
+
+
+        questionnaire.classList.remove(
+            "active"
+        );
+
+        success.classList.add(
+            "active"
+        );
+
+
+        success.innerHTML = `
+
+            <div class="ornament">
+                🕯️
+            </div>
+
+            <p class="small-title">
+                Votre réponse a bien été reçue
+            </p>
+
+            <h2>
+                Une place restera vide au banquet
+            </h2>
+
+            <div class="divider">
+                ⚔ ✦ ⚔
+            </div>
+
+            <p class="success-text">
+
+                Nous sommes sincèrement désolés
+                de ne pas pouvoir vous compter
+                parmi nous pour ce jour si important
+                à nos yeux.
+
+            </p>
+
+            <p class="success-text">
+
+                Votre présence nous manquera,
+                mais nous penserons bien à vous
+                en cette belle journée.
+
+            </p>
+
+            <p class="final-message">
+
+                Avec toute notre affection,
+
+            </p>
+
+            <p class="final-signature">
+
+                ✦ Julie & Loïc ✦
+
+            </p>
+
+        `;
+
+
+    } catch (error) {
+
+        console.error(
+            "Erreur lors de l'envoi :",
+            error
+        );
+
+
+        alert(
+            "⚠️ Le messager n'a pas réussi à transmettre votre réponse. Veuillez réessayer."
+        );
+
+
+        nextButton.disabled = false;
+
+        nextButton.textContent =
+            "⚔️ Sceller ma réponse";
+    }
+}
+
+
+/* =========================================
+   ENVOI DES RÉPONSES
 ========================================= */
 
 async function finishQuest() {
@@ -549,8 +646,6 @@ async function finishQuest() {
     nextButton.textContent =
         "⚔️ Scellement en cours...";
 
-
-    /* Préparation des données */
 
     const data = {
 
@@ -594,14 +689,11 @@ async function finishQuest() {
                         "text/plain;charset=utf-8"
                 },
 
-                body: JSON.stringify(data)
+                body:
+                    JSON.stringify(data)
             }
         );
 
-
-        /* ---------------------------------
-           Réponse envoyée
-        --------------------------------- */
 
         questionnaire.classList.remove(
             "active"
