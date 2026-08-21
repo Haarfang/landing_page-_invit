@@ -832,25 +832,19 @@ h1 {
    RESPONSIVE MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media @media (max-width: 700px) {
 
-    .screen {
-
-        padding:
-            25px 10px;
-
+    .stone-background {
+        padding: 10px;
+        align-items: flex-start;
     }
 
     .parchment {
-
-        width: 100%;
-
-        min-height: 650px;
-
-        padding:
-            70px 35px;
-
+        width: 96vw;
+        aspect-ratio: 1536 / 1024;
     }
+
+}
 
     .wax-seal {
 
