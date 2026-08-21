@@ -128,19 +128,36 @@
                  BOUTON
             ================================================== -->
 
-            <button
-                class="main-button"
-                onclick="startQuest()"
-            >
+            <div class="attendance-buttons">
 
-                <span class="button-decoration">✦</span>
+    <button
+        class="main-button attendance-button"
+        onclick="chooseAttendance('oui')"
+    >
 
-                <span>RÉPONDRE À L'INVITATION</span>
+        <span class="button-icon">⚔</span>
 
-                <span class="button-decoration">✦</span>
+        Avec joie
 
-            </button>
+        <span class="button-icon">⚔</span>
 
+    </button>
+
+
+    <button
+        class="main-button attendance-button"
+        onclick="chooseAttendance('non')"
+    >
+
+        <span class="button-icon">⚔</span>
+
+        Hélas
+
+        <span class="button-icon">⚔</span>
+
+    </button>
+
+</div>
 
             <!-- =================================================
                  DATE
