@@ -925,7 +925,23 @@ body {
     }
 
 }
+.attendance-buttons {
 
+    width: 82%;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.attendance-button {
+
+    max-width: 360px;
+
+}
     .wax-seal {
 
         width: 75px;
