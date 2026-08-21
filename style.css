@@ -54,15 +54,33 @@ body {
    FOND PRINCIPAL
 ========================================================= */
 
-.stone-background {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
+/* =========================================================
+   FOND PRINCIPAL
+========================================================= */
 
-    background-image: url("background.png");
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.stone-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        url("background.png");
+
+    background-position:
+        center center;
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+
+    overflow-y: auto;
+
 }
 
 
