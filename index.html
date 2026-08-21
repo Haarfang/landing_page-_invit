@@ -10,14 +10,10 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Julie & Loïc — Répondez à l'invitation
-    </title>
+    <title>Julie & Loïc — Répondez à l'invitation</title>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <!-- POLICES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -26,179 +22,347 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 
 <body>
 
+<div class="world">
 
-    <!-- =====================================
+
+    <!-- =====================================================
          FOND
-    ====================================== -->
+    ====================================================== -->
 
-    <div class="stone-background">
-
-
-        <!-- =================================
-             INTRODUCTION
-        ================================== -->
-
-        <main
-            id="intro"
-            class="screen active"
-        >
-
-            <section class="parchment">
+    <div class="stone-background"></div>
 
 
-                <!-- Sceau de cire -->
+    <!-- =====================================================
+         PAGE D'ACCUEIL
+    ====================================================== -->
 
-                <div class="wax-seal">
+    <main
+        id="intro"
+        class="screen active"
+    >
 
-                    <div class="paw">
-
-                        🐾
-
-                    </div>
-
-                </div>
-
-
-                <!-- Monogramme -->
-
-                <div class="monogram">
-
-                    <span>J</span>
-
-                    <div class="sword">
-
-                        ⚔
-
-                    </div>
-
-                    <span>L</span>
-
-                </div>
+        <section class="parchment intro-card">
 
 
-                <!-- Décoration -->
+            <!-- Bordure décorative -->
 
-                <div class="laurel">
-
-                    ❧ ───────── ❧
-
-                </div>
+            <div class="inner-border"></div>
 
 
-                <h1>
+            <!-- Motifs décoratifs -->
 
-                    RÉPONDEZ À
-                    <br>
-                    L'INVITATION
-
-                </h1>
-
-
-                <p class="intro-text">
-
-                    Julie & Loïc vous convient
-                    à célébrer leur union
-
-                    <br>
-
-                    lors d'une journée mémorable.
-
-                </p>
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
 
 
-                <div class="ornament-line">
+            <!-- =================================================
+                 SCEAU
+            ================================================== -->
 
-                    <span></span>
-                    ◆
-                    <span></span>
+            <div class="wax-seal">
 
-                </div>
+                <div class="wax-ribbon"></div>
 
-
-                <button
-                    class="main-button"
-                    onclick="startQuest()"
+                <svg
+                    class="wolf-paw"
+                    viewBox="0 0 100 100"
+                    aria-hidden="true"
                 >
 
-                    <span class="button-icon">
-                        ⚔
-                    </span>
+                    <!-- coussin principal -->
+                    <ellipse
+                        cx="50"
+                        cy="65"
+                        rx="20"
+                        ry="16"
+                    />
 
-                    Répondre à l'invitation
+                    <!-- doigts -->
+                    <ellipse
+                        cx="25"
+                        cy="43"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-25 25 43)"
+                    />
 
-                    <span class="button-icon">
-                        ⚔
-                    </span>
+                    <ellipse
+                        cx="39"
+                        cy="32"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-8 39 32)"
+                    />
 
-                </button>
+                    <ellipse
+                        cx="55"
+                        cy="30"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(8 55 30)"
+                    />
 
+                    <ellipse
+                        cx="70"
+                        cy="39"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(25 70 39)"
+                    />
 
-                <p class="date">
+                </svg>
 
-                    19 · 06 · 2027
-                    <br>
-                    <span>
-                        Maresville
-                    </span>
-
-                </p>
-
-
-            </section>
-
-        </main>
-
-
-
-        <!-- =====================================
-             QUESTIONNAIRE
-        ====================================== -->
-
-        <main
-            id="questionnaire"
-            class="screen"
-        >
-
-            <section class="parchment questionnaire-card">
+            </div>
 
 
-                <!-- En-tête -->
+            <!-- =================================================
+                 MONOGRAMME
+            ================================================== -->
 
-                <div class="monogram small">
+            <div class="monogram">
 
-                    <span>J</span>
+                <span>J</span>
 
-                    <div class="sword">
-                        ⚔
-                    </div>
+                <svg
+                    class="sword"
+                    viewBox="0 0 60 110"
+                    aria-hidden="true"
+                >
 
-                    <span>L</span>
+                    <path
+                        d="M30 3 L36 55 L30 82 L24 55 Z"
+                    />
 
+                    <path
+                        d="M21 51 L39 51"
+                    />
+
+                    <path
+                        d="M30 80 L30 98"
+                    />
+
+                    <path
+                        d="M21 98 L39 98"
+                    />
+
+                </svg>
+
+                <span>L</span>
+
+            </div>
+
+
+            <!-- =================================================
+                 ORNEMENT
+            ================================================== -->
+
+            <div class="ornament-top">
+
+                <span class="ornament-leaf left"></span>
+
+                <span class="ornament-line-short"></span>
+
+                <span class="ornament-diamond"></span>
+
+                <span class="ornament-line-short"></span>
+
+                <span class="ornament-leaf right"></span>
+
+            </div>
+
+
+            <!-- =================================================
+                 TITRE
+            ================================================== -->
+
+            <h1>
+
+                <span>RÉPONDEZ À</span>
+
+                <span>L'INVITATION</span>
+
+            </h1>
+
+
+            <!-- =================================================
+                 TEXTE
+            ================================================== -->
+
+            <p class="intro-text">
+
+                Julie & Loïc vous convient à célébrer leur union
+
+                <br>
+
+                lors d'une journée mémorable.
+
+            </p>
+
+
+            <!-- Séparateur -->
+
+            <div class="ornament-divider">
+
+                <span></span>
+
+                <i>◆</i>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOUTON
+            ================================================== -->
+
+            <button
+                class="main-button"
+                onclick="startQuest()"
+            >
+
+                <span class="button-decoration">✦</span>
+
+                <span>RÉPONDRE À L'INVITATION</span>
+
+                <span class="button-decoration">✦</span>
+
+            </button>
+
+
+            <!-- =================================================
+                 DATE
+            ================================================== -->
+
+            <div class="date">
+
+                <span class="date-main">
+                    19 · 07 · 2027
+                </span>
+
+                <span class="date-place">
+                    MARESVILLE
+                </span>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         QUESTIONNAIRE
+    ====================================================== -->
+
+    <main
+        id="questionnaire"
+        class="screen"
+    >
+
+        <section class="parchment questionnaire-card">
+
+            <div class="inner-border"></div>
+
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+
+
+            <!-- Petit monogramme -->
+
+            <div class="monogram small">
+
+                <span>J</span>
+
+                <svg
+                    class="sword"
+                    viewBox="0 0 60 110"
+                    aria-hidden="true"
+                >
+
+                    <path d="M30 3 L36 55 L30 82 L24 55 Z"></path>
+                    <path d="M21 51 L39 51"></path>
+                    <path d="M30 80 L30 98"></path>
+                    <path d="M21 98 L39 98"></path>
+
+                </svg>
+
+                <span>L</span>
+
+            </div>
+
+
+            <!-- Sceau -->
+
+            <div class="wax-seal small-seal">
+
+                <svg
+                    class="wolf-paw"
+                    viewBox="0 0 100 100"
+                    aria-hidden="true"
+                >
+
+                    <ellipse cx="50" cy="65" rx="20" ry="16"></ellipse>
+
+                    <ellipse
+                        cx="25"
+                        cy="43"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-25 25 43)"
+                    ></ellipse>
+
+                    <ellipse
+                        cx="39"
+                        cy="32"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-8 39 32)"
+                    ></ellipse>
+
+                    <ellipse
+                        cx="55"
+                        cy="30"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(8 55 30)"
+                    ></ellipse>
+
+                    <ellipse
+                        cx="70"
+                        cy="39"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(25 70 39)"
+                    ></ellipse>
+
+                </svg>
+
+            </div>
+
+
+            <div class="questionnaire-heading">
+
+                <div class="mini-ornament">
+                    ✦
                 </div>
-
-
-                <div class="wax-seal small-seal">
-
-                    <div class="paw">
-                        🐾
-                    </div>
-
-                </div>
-
 
                 <h1 class="questionnaire-title">
 
@@ -208,196 +372,260 @@
 
                 </h1>
 
-
                 <p class="subtitle">
 
-                    Julie & Loïc vous convient à célébrer
-                    leur union lors d'une journée mémorable
+                    Julie & Loïc vous convient à célébrer leur union
+                    lors d'une journée mémorable.
 
                 </p>
 
+            </div>
 
-                <div class="ornament-line">
 
-                    <span></span>
-                    ◆
-                    <span></span>
+            <div class="ornament-divider">
+
+                <span></span>
+
+                <i>◆</i>
+
+                <span></span>
+
+            </div>
+
+
+            <!-- =================================================
+                 ZONE DES QUESTIONS
+            ================================================== -->
+
+            <div
+                id="question-container"
+                class="question-container"
+            >
+
+            </div>
+
+
+            <!-- =================================================
+                 PROGRESSION
+            ================================================== -->
+
+            <div class="progress-section">
+
+                <div class="progress-label">
+
+                    <span>CHEMINEMENT</span>
+
+                    <span id="progress-text">
+                        Question 1 / 8
+                    </span>
 
                 </div>
 
 
-                <!-- Zone dynamique -->
-
-                <div
-                    id="question-container"
-                    class="question-container"
-                >
-
-                </div>
-
-
-                <!-- Progression -->
-
-                <div class="progress-section">
-
-                    <div class="progress-bar-wrapper">
-
-                        <div
-                            id="progress-bar"
-                            class="progress-bar"
-                        ></div>
-
-                    </div>
-
+                <div class="progress-bar-wrapper">
 
                     <div
-                        id="progress-text"
-                        class="progress-text"
-                    >
-
-                        Question 1 / 8
-
-                    </div>
+                        id="progress-bar"
+                        class="progress-bar"
+                    ></div>
 
                 </div>
 
+            </div>
 
-                <!-- Navigation -->
 
-                <div class="navigation">
+            <!-- =================================================
+                 NAVIGATION
+            ================================================== -->
 
-                    <button
-                        id="previous-button"
-                        class="nav-button previous"
-                        onclick="previousQuestion()"
-                    >
+            <div class="navigation">
 
-                        ← Retour
+                <button
+                    id="previous-button"
+                    class="nav-button previous"
+                    onclick="previousQuestion()"
+                >
 
-                    </button>
+                    <span>←</span>
 
+                    RETOUR
 
-                    <button
-                        id="next-button"
-                        class="nav-button next"
-                        onclick="nextQuestion()"
-                    >
+                </button>
 
-                        Continuer →
 
-                    </button>
+                <button
+                    id="next-button"
+                    class="nav-button next"
+                    onclick="nextQuestion()"
+                >
 
-                </div>
+                    CONTINUER
 
+                    <span>→</span>
 
-            </section>
+                </button>
 
-        </main>
+            </div>
 
 
+        </section>
 
-        <!-- =====================================
-             MESSAGE FINAL
-        ====================================== -->
+    </main>
 
-        <main
-            id="success"
-            class="screen"
-        >
 
-            <section class="parchment success-card">
 
+    <!-- =====================================================
+         MESSAGE FINAL
+    ====================================================== -->
 
-                <div class="wax-seal">
+    <main
+        id="success"
+        class="screen"
+    >
 
-                    <div class="paw">
-                        🐾
-                    </div>
+        <section class="parchment success-card">
 
-                </div>
+            <div class="inner-border"></div>
 
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
 
-                <div class="monogram">
 
-                    <span>J</span>
+            <div class="wax-seal">
 
-                    <div class="sword">
-                        ⚔
-                    </div>
+                <svg
+                    class="wolf-paw"
+                    viewBox="0 0 100 100"
+                    aria-hidden="true"
+                >
 
-                    <span>L</span>
+                    <ellipse cx="50" cy="65" rx="20" ry="16"></ellipse>
 
-                </div>
+                    <ellipse
+                        cx="25"
+                        cy="43"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-25 25 43)"
+                    ></ellipse>
 
+                    <ellipse
+                        cx="39"
+                        cy="32"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(-8 39 32)"
+                    ></ellipse>
 
-                <div class="ornament">
+                    <ellipse
+                        cx="55"
+                        cy="30"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(8 55 30)"
+                    ></ellipse>
 
-                    ✦
+                    <ellipse
+                        cx="70"
+                        cy="39"
+                        rx="8"
+                        ry="13"
+                        transform="rotate(25 70 39)"
+                    ></ellipse>
 
-                </div>
+                </svg>
 
+            </div>
 
-                <h2>
 
-                    Votre réponse a été scellée
+            <div class="monogram">
 
-                </h2>
+                <span>J</span>
 
+                <svg
+                    class="sword"
+                    viewBox="0 0 60 110"
+                    aria-hidden="true"
+                >
 
-                <div class="ornament-line">
+                    <path d="M30 3 L36 55 L30 82 L24 55 Z"></path>
+                    <path d="M21 51 L39 51"></path>
+                    <path d="M30 80 L30 98"></path>
+                    <path d="M21 98 L39 98"></path>
 
-                    <span></span>
-                    ◆
-                    <span></span>
+                </svg>
 
-                </div>
+                <span>L</span>
 
+            </div>
 
-                <p class="success-text">
 
-                    Merci d'avoir répondu à notre invitation.
+            <div class="ornament-symbol">
+                ✦
+            </div>
 
-                </p>
 
+            <h2>
+                VOTRE RÉPONSE A ÉTÉ SCELLÉE
+            </h2>
 
-                <p class="success-text">
 
-                    Nous avons hâte de partager
-                    cette journée avec vous.
+            <div class="ornament-divider">
 
-                </p>
+                <span></span>
 
+                <i>◆</i>
 
-                <p class="final-message">
+                <span></span>
 
-                    Avec toute notre affection,
+            </div>
 
-                </p>
 
+            <p class="success-text">
 
-                <p class="final-signature">
+                Merci d'avoir répondu à notre invitation.
 
-                    ✦ Julie & Loïc ✦
+            </p>
 
-                </p>
 
+            <p class="success-text">
 
-            </section>
+                Nous avons hâte de partager
+                cette journée avec vous.
 
-        </main>
+            </p>
 
 
-    </div>
+            <p class="final-message">
 
+                Avec toute notre affection,
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
+            </p>
 
-    <script
-        src="script.js"
-        defer
-    ></script>
+
+            <p class="final-signature">
+
+                ✦ Julie & Loïc ✦
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT EXISTANT
+     NE PAS MODIFIER
+====================================================== -->
+
+<script src="script.js" defer></script>
 
 
 </body>
