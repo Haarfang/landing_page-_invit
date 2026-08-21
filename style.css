@@ -398,8 +398,53 @@ body {
 
     color: #d4ad61;
 
+   
+}
+.attendance-buttons {
+    position: absolute;
+
+    top: 65%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(650px, 75%);
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
 }
 
+.attendance-button {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    transform: none;
+
+    width: 100%;
+
+    max-width: 300px;
+}
+
+.attendance-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        linear-gradient(
+            to bottom,
+            #a33b2c,
+            #752018
+        );
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.4);
+}
 
 /* =========================================================
    DATE
