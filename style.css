@@ -255,26 +255,32 @@ body {
    TEXTE INTRO
 ========================================================= */
 
-.intro-text {
+.parchment .intro-text {
+    position: absolute;
 
-    max-width: 600px;
+    top: 49%;
+    left: 50%;
 
-    margin:
-        32px auto 25px;
+    transform: translateX(-50%);
+
+    width: 65%;
+
+    margin: 0;
+
+    text-align: center;
 
     font-family:
         "Crimson Text",
         Georgia,
         serif;
 
-    font-size: 25px;
+    font-size:
+        clamp(17px, 1.8vw, 25px);
 
     line-height: 1.4;
 
     color: #422316;
-
 }
-
 
 /* =========================================================
    ORNEMENT
@@ -394,33 +400,41 @@ body {
    DATE
 ========================================================= */
 
-.date {
+.parchment .date {
+    position: absolute;
 
-    margin-top: 35px;
+    top: 79%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 60%;
+
+    margin: 0;
+
+    text-align: center;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size: 24px;
+    font-size:
+        clamp(17px, 2vw, 25px);
 
     font-weight: 600;
 
     letter-spacing: 3px;
 
     color: #4b2617;
-
 }
 
-.date span {
-
-    font-size: 20px;
+.parchment .date span {
+    font-size:
+        clamp(16px, 1.7vw, 21px);
 
     letter-spacing: 1px;
-
 }
-
 
 /* =========================================================
    QUESTIONNAIRE
