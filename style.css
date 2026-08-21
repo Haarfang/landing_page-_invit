@@ -59,30 +59,20 @@ body {
 ========================================================= */
 
 .stone-background {
-
-    position: fixed;
-
-    inset: 0;
-
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
 
-    background-image:
-        url("background.png");
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background-position:
-        center center;
+    padding: 20px;
+    box-sizing: border-box;
 
-    background-size:
-        cover;
-
-    background-repeat:
-        no-repeat;
+    background: #17130f;
 
     overflow-y: auto;
-
 }
-
 
 /* =========================================================
    ÉCRANS
