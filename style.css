@@ -79,7 +79,7 @@ body {
 ========================================================= */
 
 .screen {
-
+    width: 100%;
     min-height: 100vh;
 
     display: none;
@@ -87,9 +87,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding:
-        50px 25px;
-
+    padding: 20px;
 }
 
 .screen.active {
@@ -831,15 +829,25 @@ h1 {
    RESPONSIVE MOBILE
 ========================================================= */
 
-@media @media (max-width: 700px) {
+/* =========================================================
+   ADAPTATION MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
 
     .stone-background {
         padding: 10px;
         align-items: flex-start;
     }
 
+    .screen {
+        padding: 10px;
+    }
+
     .parchment {
         width: 96vw;
+        max-width: none;
+
         aspect-ratio: 1536 / 1024;
     }
 
