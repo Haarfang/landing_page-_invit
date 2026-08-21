@@ -325,7 +325,17 @@ body {
    BOUTON PRINCIPAL
 ========================================================= */
 
-.main-button {
+.parchment .main-button {
+    position: absolute;
+
+    top: 65%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(420px, 65%);
+
+    padding: 16px 25px;
 
     border: 2px solid #4c1b12;
 
@@ -338,17 +348,13 @@ body {
 
     color: #f3d995;
 
-    padding:
-        18px 38px;
-
-    min-width: 330px;
-
     font-family:
         "Crimson Text",
         Georgia,
         serif;
 
-    font-size: 21px;
+    font-size:
+        clamp(16px, 1.8vw, 22px);
 
     font-weight: 700;
 
@@ -363,9 +369,7 @@ body {
 
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-
+        box-shadow 0.2s ease;
 }
 
 .main-button:hover {
