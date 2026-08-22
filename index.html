@@ -14,22 +14,25 @@
 
     <!-- POLICES -->
     <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap"
-    rel="stylesheet"
->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-<link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -50,13 +53,7 @@
 
         <section class="parchment intro-card">
 
-
-            <!-- Bordure décorative -->
-
             <div class="inner-border"></div>
-
-
-            <!-- Motifs décoratifs -->
 
             <div class="corner corner-tl"></div>
             <div class="corner corner-tr"></div>
@@ -64,9 +61,7 @@
             <div class="corner corner-br"></div>
 
 
-            <!-- =================================================
-                 ORNEMENT
-            ================================================== -->
+            <!-- ORNEMENT -->
 
             <div class="ornament-top">
 
@@ -74,7 +69,9 @@
 
                 <span class="ornament-line-short"></span>
 
-                <span class="ornament-diamond"></span>
+                <span class="ornament-diamond">
+                    ◆
+                </span>
 
                 <span class="ornament-line-short"></span>
 
@@ -83,9 +80,7 @@
             </div>
 
 
-            <!-- =================================================
-                 TITRE
-            ================================================== -->
+            <!-- TITRE -->
 
             <h1>
 
@@ -96,9 +91,7 @@
             </h1>
 
 
-            <!-- =================================================
-                 TEXTE
-            ================================================== -->
+            <!-- INTRODUCTION -->
 
             <p class="intro-text">
 
@@ -106,12 +99,12 @@
 
                 <br>
 
-                lors d'une soirée mémorable!
+                lors d'une soirée mémorable !
 
             </p>
 
 
-            <!-- Séparateur -->
+            <!-- SÉPARATEUR -->
 
             <div class="ornament-divider">
 
@@ -124,44 +117,43 @@
             </div>
 
 
-            <!-- =================================================
-                 BOUTON
-            ================================================== -->
+            <!-- CHOIX DE PRÉSENCE -->
 
             <div class="attendance-buttons">
 
-    <button
-        class="main-button attendance-button"
-        onclick="chooseAttendance('oui')"
-    >
+                <button
+                    type="button"
+                    class="attendance-button"
+                    onclick="chooseAttendance('oui')"
+                >
 
-        <span class="button-icon">⚔</span>
+                    <span class="button-icon">⚔</span>
 
-        Avec joie
+                    Avec joie
 
-        <span class="button-icon">⚔</span>
+                    <span class="button-icon">⚔</span>
 
-    </button>
+                </button>
 
 
-    <button
-        class="main-button attendance-button"
-        onclick="chooseAttendance('non')"
-    >
+                <button
+                    type="button"
+                    class="attendance-button"
+                    onclick="chooseAttendance('non')"
+                >
 
-        <span class="button-icon">⚔</span>
+                    <span class="button-icon">🕯</span>
 
-        Hélas
+                    Hélas
 
-        <span class="button-icon">⚔</span>
+                    <span class="button-icon">🕯</span>
 
-    </button>
+                </button>
 
-</div>
+            </div>
 
-            <!-- =================================================
-                 DATE
-            ================================================== -->
+
+            <!-- DATE -->
 
             <div class="date">
 
@@ -201,6 +193,8 @@
             <div class="corner corner-br"></div>
 
 
+            <!-- EN-TÊTE -->
+
             <div class="questionnaire-heading">
 
                 <div class="mini-ornament">
@@ -208,18 +202,12 @@
                 </div>
 
                 <h1 class="questionnaire-title">
-
-                    RÉPONDEZ À
-                    <br>
-                    L'INVITATION
-
+                    VOTRE RÉPONSE
                 </h1>
 
                 <p class="subtitle">
-
-                    Julie & Loïc vous convient à célébrer leur union
-                    lors d'une journée mémorable.
-
+                    Quelques dernières informations
+                    avant de sceller votre réponse.
                 </p>
 
             </div>
@@ -236,30 +224,26 @@
             </div>
 
 
-            <!-- =================================================
-                 ZONE DES QUESTIONS
-            ================================================== -->
+            <!-- QUESTION -->
 
             <div
                 id="question-container"
                 class="question-container"
-            >
-
-            </div>
+            ></div>
 
 
-            <!-- =================================================
-                 PROGRESSION
-            ================================================== -->
+            <!-- PROGRESSION -->
 
             <div class="progress-section">
 
                 <div class="progress-label">
 
-                    <span>CHEMINEMENT</span>
+                    <span>
+                        CHEMINEMENT
+                    </span>
 
                     <span id="progress-text">
-                        Question 1 / 8
+                        Question 1 / 7
                     </span>
 
                 </div>
@@ -277,13 +261,12 @@
             </div>
 
 
-            <!-- =================================================
-                 NAVIGATION
-            ================================================== -->
+            <!-- NAVIGATION -->
 
             <div class="navigation">
 
                 <button
+                    type="button"
                     id="previous-button"
                     class="nav-button previous"
                     onclick="previousQuestion()"
@@ -297,6 +280,7 @@
 
 
                 <button
+                    type="button"
                     id="next-button"
                     class="nav-button next"
                     onclick="nextQuestion()"
@@ -309,7 +293,6 @@
                 </button>
 
             </div>
-
 
         </section>
 
@@ -336,9 +319,15 @@
             <div class="corner corner-br"></div>
 
 
+            <div class="mini-ornament">
+                ✦
+            </div>
+
 
             <h2>
-                VOTRE RÉPONSE A ÉTÉ SCELLÉE
+                VOTRE RÉPONSE
+                <br>
+                A ÉTÉ SCELLÉE
             </h2>
 
 
@@ -354,31 +343,23 @@
 
 
             <p class="success-text">
-
                 Merci d'avoir répondu à notre invitation.
-
             </p>
 
 
             <p class="success-text">
-
                 Nous avons hâte de partager
                 cette journée avec vous.
-
             </p>
 
 
             <p class="final-message">
-
                 Avec toute notre affection,
-
             </p>
 
 
             <p class="final-signature">
-
                 ✦ Julie & Loïc ✦
-
             </p>
 
 
@@ -390,12 +371,10 @@
 </div>
 
 
-<!-- =====================================================
-     JAVASCRIPT EXISTANT
-     NE PAS MODIFIER
-====================================================== -->
-
-<script src="script.js" defer></script>
+<script
+    src="script.js"
+    defer
+></script>
 
 
 </body>
