@@ -372,7 +372,7 @@ body {
         box-shadow 0.2s ease;
 }
 
-.main-button:hover {
+.parchment > .main-button:hover {
 
    transform:
     translateX(-50%)
