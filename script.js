@@ -144,7 +144,52 @@ const nextButton =
 /* =========================================
    COMMENCER LE QUESTIONNAIRE
 ========================================= */
+/* =========================================
+   CHOIX DE LA PRÉSENCE
+========================================= */
 
+function chooseAttendance(choice) {
+
+    /*
+       On mémorise directement la réponse
+       à la première question.
+    */
+
+    if (choice === "oui") {
+
+        answers[0] =
+            "⚔️ Oui, je réponds présent(e) !";
+
+        declined = false;
+
+    }
+
+    else if (choice === "non") {
+
+        answers[0] =
+            "🕯️ Hélas, je ne pourrai être des nôtres.";
+
+        declined = true;
+
+    }
+
+
+    /*
+       On ouvre le questionnaire
+       directement à la question suivante :
+       
+       Question 1 = présence
+       Question 2 = nom
+    */
+
+    intro.classList.remove("active");
+
+    questionnaire.classList.add("active");
+
+    currentQuestion = 1;
+
+    showQuestion();
+}
 function startQuest() {
 
     intro.classList.remove("active");
