@@ -408,26 +408,29 @@ body {
 
     transform: translateX(-50%);
 
-    width: min(650px, 75%);
+    width: min(700px, 78%);
 
     display: flex;
 
     justify-content: center;
+    align-items: center;
 
-    gap: 25px;
+    gap: 30px;
 }
-
 .attendance-button {
     position: relative;
 
     top: auto;
     left: auto;
 
-    transform: none;
+    transform: none !important;
 
-    width: 100%;
+    width: 300px;
+    max-width: 45%;
 
-    max-width: 300px;
+    flex: 1 1 0;
+
+    margin: 0;
 }
 
 .attendance-button:hover {
@@ -441,6 +444,10 @@ body {
             #a33b2c,
             #752018
         );
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.4);
+}
 
     box-shadow:
         0 8px 18px rgba(0, 0, 0, 0.4);
