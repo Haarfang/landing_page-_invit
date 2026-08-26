@@ -529,6 +529,7 @@ input {
 
 
 .answers {
+
     width: 100%;
 
     display: flex;
@@ -537,6 +538,9 @@ input {
 
     gap:
         clamp(7px, 1vh, 10px);
+
+    transform: translateX(12px);
+
 }
 
 
@@ -645,6 +649,7 @@ input {
 
 
 .text-input {
+
     width: 100%;
 
     min-height:
@@ -678,6 +683,8 @@ input {
     font-size: 16px;
 
     line-height: 1.35;
+
+    transform: translateX(16px);
 }
 
 
@@ -711,6 +718,7 @@ input {
 
     color:
         #53311d;
+    transform: translateX(16px);
 }
 
 
