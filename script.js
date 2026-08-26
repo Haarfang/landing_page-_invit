@@ -221,32 +221,6 @@ function showQuestion() {
     questionContainer.innerHTML =
         "";
 
-
-    const number =
-        document.createElement(
-            "div"
-        );
-
-
-    number.className =
-        "question-number";
-
-
-    const total =
-        declined
-            ? 1
-            : questions.length;
-
-
-    number.textContent =
-        `QUESTION ${currentQuestion + 1} / ${total}`;
-
-
-    questionContainer.appendChild(
-        number
-    );
-
-
     const title =
         document.createElement(
             "h2"
