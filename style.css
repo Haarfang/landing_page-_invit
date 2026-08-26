@@ -475,48 +475,6 @@ input {
 }
 
 
-.question-number {
-    margin-bottom:
-        clamp(15px, 2.3vh, 22px);
-
-    font-family:
-        "Cormorant Garamond",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(13px, 3.3vw, 16px);
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    color: #4a2a17;
-}
-
-
-.question-number::before {
-    content: "◆";
-
-    margin-right: 8px;
-
-    color: var(--gold);
-
-    font-size: 7px;
-}
-
-
-.question-number::after {
-    content: "◆";
-
-    margin-left: 8px;
-
-    color: var(--gold);
-
-    font-size: 7px;
-}
-
-
 .question-title {
     width: 100%;
 
