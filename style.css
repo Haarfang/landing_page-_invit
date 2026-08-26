@@ -233,8 +233,8 @@ input {
     display: grid;
 
     grid-template-rows:
-        25%
-        75%;
+        24%
+        76%;
 
 }
 
@@ -534,7 +534,7 @@ input {
     display: grid;
 
     grid-template-rows:
-        19%
+        18%
         minmax(0, 1fr)
         auto;
 
