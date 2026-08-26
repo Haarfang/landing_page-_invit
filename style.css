@@ -5,6 +5,7 @@
 :root {
     --brown: #3b1d12;
     --dark-brown: #24120c;
+
     --deep-red: #681d16;
     --red: #752117;
     --red-light: #963428;
@@ -16,6 +17,11 @@
     --parchment-light: #f1dfb7;
 
     --border: #765128;
+
+    --page-bg: #17130f;
+
+    --parchment-max-width: 1280px;
+    --parchment-max-height: 900px;
 }
 
 
@@ -23,20 +29,45 @@
    RESET
 ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-
+html {
     width: 100%;
     min-height: 100%;
 
+    background: var(--page-bg);
+
+    -webkit-text-size-adjust: 100%;
+}
+
+
+body {
+    margin: 0;
+
+    width: 100%;
+    min-height: 100dvh;
+
     overflow-x: hidden;
+
+    font-family:
+        "Crimson Text",
+        Georgia,
+        serif;
+
+    color: var(--brown);
+
+    background:
+        radial-gradient(
+            circle at center,
+            #282017 0%,
+            #17130f 68%,
+            #100d0a 100%
+        );
 }
 
 
@@ -47,70 +78,64 @@ textarea {
 }
 
 
-/* =========================================================
-   BODY
-========================================================= */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
 
-body {
 
-    font-family:
-        "Crimson Text",
-        Georgia,
-        serif;
+button:focus-visible,
+textarea:focus-visible {
+    outline:
+        2px solid var(--gold);
 
-    color: var(--brown);
-
-    background:
-        #17130f;
-
-    min-height: 100vh;
+    outline-offset: 3px;
 }
 
 
 /* =========================================================
-   CONTENEUR PRINCIPAL
+   STRUCTURE GÉNÉRALE
 ========================================================= */
 
-.stone-background {
-
+.site-shell {
     width: 100%;
-    min-height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    background:
-        #17130f;
-
-    overflow-x: hidden;
+    min-height: 100dvh;
 }
 
-
-/* =========================================================
-   ÉCRANS
-========================================================= */
 
 .screen {
-
     width: 100%;
-
-    min-height: 100vh;
+    min-height: 100dvh;
 
     display: none;
 
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding:
+        clamp(12px, 2.5vw, 34px);
+
+    overflow: hidden;
 }
 
 
 .screen.active {
     display: flex;
+
+    animation:
+        screenFadeIn 0.35s ease both;
+}
+
+
+@keyframes screenFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 
@@ -119,12 +144,23 @@ body {
 ========================================================= */
 
 .parchment {
-
     position: relative;
 
-    width: min(92vw, 1100px);
+    width:
+        min(
+            calc(100vw - clamp(24px, 5vw, 80px)),
+            var(--parchment-max-width)
+        );
 
-    aspect-ratio: 1536 / 1024;
+    height:
+        min(
+            calc(100dvh - clamp(24px, 5vh, 70px)),
+            var(--parchment-max-height)
+        );
+
+    min-height: 600px;
+
+    overflow: hidden;
 
     background-image:
         url("background.png");
@@ -138,51 +174,74 @@ body {
     background-repeat:
         no-repeat;
 
-    margin: 0 auto;
+    border-radius: 2px;
 
-    overflow: hidden;
+    box-shadow:
+        0 26px 65px rgba(0, 0, 0, 0.50),
+        0 5px 14px rgba(0, 0, 0, 0.28);
+
+    isolation: isolate;
+}
+
+
+/* léger voile pour améliorer la lecture sans masquer le fond */
+
+.parchment::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 245, 213, 0.03),
+            rgba(104, 52, 24, 0.02)
+        );
 }
 
 
 /* =========================================================
-   ÉLÉMENTS DÉCORATIFS
+   BORDURES DÉCORATIVES
 ========================================================= */
 
 .inner-border {
-
     position: absolute;
 
-    inset: 4.5%;
+    inset: clamp(24px, 4.5%, 58px);
 
-    border:
-        1px solid rgba(118, 81, 40, 0.65);
+    z-index: 1;
 
     pointer-events: none;
 
-    z-index: 1;
+    border:
+        1px solid rgba(118, 81, 40, 0.60);
 }
 
 
 .corner {
-
     position: absolute;
 
-    width: 35px;
-    height: 35px;
+    width: clamp(25px, 3vw, 40px);
+    height: clamp(25px, 3vw, 40px);
 
-    border-color:
-        rgba(118, 81, 40, 0.75);
+    z-index: 2;
 
     pointer-events: none;
 
-    z-index: 2;
+    border-color:
+        rgba(118, 81, 40, 0.78);
 }
 
 
 .corner-tl {
-
-    top: 4.5%;
-    left: 4.5%;
+    top: clamp(24px, 4.5%, 58px);
+    left: clamp(24px, 4.5%, 58px);
 
     border-top: 2px solid;
     border-left: 2px solid;
@@ -190,9 +249,8 @@ body {
 
 
 .corner-tr {
-
-    top: 4.5%;
-    right: 4.5%;
+    top: clamp(24px, 4.5%, 58px);
+    right: clamp(24px, 4.5%, 58px);
 
     border-top: 2px solid;
     border-right: 2px solid;
@@ -200,9 +258,8 @@ body {
 
 
 .corner-bl {
-
-    bottom: 4.5%;
-    left: 4.5%;
+    bottom: clamp(24px, 4.5%, 58px);
+    left: clamp(24px, 4.5%, 58px);
 
     border-bottom: 2px solid;
     border-left: 2px solid;
@@ -210,12 +267,11 @@ body {
 
 
 .corner-br {
+    right: clamp(24px, 4.5%, 58px);
+    bottom: clamp(24px, 4.5%, 58px);
 
-    bottom: 4.5%;
-    right: 4.5%;
-
-    border-bottom: 2px solid;
     border-right: 2px solid;
+    border-bottom: 2px solid;
 }
 
 
@@ -224,45 +280,45 @@ body {
 ========================================================= */
 
 .ornament-top {
+    width:
+        min(
+            52%,
+            560px
+        );
 
-    position: absolute;
-
-    top: 10%;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 48%;
+    margin:
+        0 auto;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    gap: 12px;
+    gap:
+        clamp(8px, 1.3vw, 15px);
 
     color: var(--gold);
-
-    z-index: 5;
 }
 
 
 .ornament-line-short {
+    flex: 1;
 
     height: 1px;
 
-    flex: 1;
-
     background:
-        var(--gold);
+        linear-gradient(
+            to right,
+            transparent,
+            var(--gold),
+            transparent
+        );
 }
 
 
 .ornament-diamond {
-
-    font-size: 13px;
+    font-size:
+        clamp(10px, 1.2vw, 14px);
 
     color:
         var(--gold);
@@ -270,7 +326,6 @@ body {
 
 
 .ornament-leaf {
-
     width: 10px;
     height: 10px;
 
@@ -283,53 +338,47 @@ body {
 
 
 .ornament-divider {
+    width:
+        min(
+            70%,
+            580px
+        );
 
-    position: absolute;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 55%;
+    margin:
+        clamp(17px, 2.4vh, 28px)
+        auto;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 12px;
-
-    z-index: 5;
-}
-
-
-.intro-card .ornament-divider {
-
-    top: 59%;
 }
 
 
 .ornament-divider span {
+    flex: 1;
 
     height: 1px;
 
-    flex: 1;
-
     background:
-        rgba(118, 81, 40, 0.8);
+        linear-gradient(
+            to right,
+            transparent,
+            rgba(118, 81, 40, 0.90),
+            transparent
+        );
 }
 
 
 .ornament-divider i {
-
     font-style: normal;
+
+    font-size: 11px;
 
     color:
         var(--gold);
-
-    font-size: 12px;
 }
 
 
@@ -337,22 +386,42 @@ body {
    PAGE D'ACCUEIL
 ========================================================= */
 
-.intro-card h1 {
+.intro-content {
+    position: relative;
 
-    position: absolute;
+    z-index: 5;
 
-    top: 31%;
+    width: 100%;
+    height: 100%;
 
-    left: 50%;
+    display: grid;
 
-    transform:
-        translateX(-50%);
+    grid-template-rows:
+        auto
+        1fr
+        auto;
 
-    width: 78%;
+    padding:
+        clamp(58px, 8vh, 90px)
+        clamp(55px, 10vw, 140px)
+        clamp(52px, 7vh, 78px);
+}
 
-    margin: 0;
+
+.intro-main {
+    align-self: center;
+
+    width: 100%;
+
+    margin-top:
+        clamp(0px, 2vh, 18px);
 
     text-align: center;
+}
+
+
+.intro-title {
+    margin: 0;
 
     font-family:
         "Cormorant Garamond",
@@ -360,108 +429,103 @@ body {
         serif;
 
     font-size:
-        clamp(42px, 5vw, 72px);
+        clamp(48px, 6vw, 82px);
 
-    line-height: 0.9;
+    line-height: 0.86;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        clamp(1px, 0.2vw, 3px);
+
+    text-align: center;
 
     color:
-        #3a1b10;
+        #35170e;
 
-    z-index: 5;
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 
-.intro-card h1 span {
-
+.intro-title span {
     display: block;
 }
 
 
 .intro-text {
+    width:
+        min(
+            100%,
+            750px
+        );
 
-    position: absolute;
-
-    top: 45%;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 70%;
-
-    margin: 0;
-
-    text-align: center;
+    margin:
+        clamp(26px, 3vh, 36px)
+        auto
+        0;
 
     font-size:
-        clamp(17px, 1.8vw, 25px);
+        clamp(18px, 1.75vw, 25px);
 
-    line-height: 1.4;
+    line-height: 1.45;
 
     color:
         #422316;
 
-    z-index: 5;
+    text-align: center;
 }
 
 
-/* =========================================================
-   BOUTONS PRÉSENCE
-========================================================= */
-
 .attendance-buttons {
+    width:
+        min(
+            100%,
+            760px
+        );
 
-    position: absolute;
+    margin:
+        0 auto;
 
-    top: 64%;
+    display: grid;
 
-    left: 50%;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-    transform:
-        translateX(-50%);
-
-    width: 70%;
-
-    max-width: 760px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: stretch;
-
-    gap: 25px;
-
-    z-index: 50;
+    gap:
+        clamp(14px, 2vw, 26px);
 }
 
 
 .attendance-button {
-
-    position: relative;
-
-    width: calc(50% - 12.5px);
-
-    min-height: 58px;
+    min-height:
+        clamp(58px, 6.5vh, 72px);
 
     padding:
-        13px 18px;
+        12px
+        clamp(10px, 2vw, 22px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap:
+        clamp(6px, 1vw, 12px);
 
     border:
-        2px solid #4c1b12;
+        1px solid #4c1b12;
 
     border-radius: 2px;
 
+    cursor: pointer;
+
     background:
         linear-gradient(
-            to bottom,
-            #8c3024,
-            #651c15
+            180deg,
+            #913227 0%,
+            #752117 45%,
+            #601811 100%
         );
 
     color:
@@ -473,7 +537,7 @@ body {
         serif;
 
     font-size:
-        clamp(16px, 1.8vw, 22px);
+        clamp(17px, 1.65vw, 22px);
 
     font-weight: 700;
 
@@ -481,81 +545,56 @@ body {
 
     text-transform: uppercase;
 
-    cursor: pointer;
-
     box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.35);
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 5px 12px rgba(0, 0, 0, 0.30);
 
     transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.15s ease;
-
-    z-index: 51;
-
-    pointer-events: auto;
+        transform 0.16s ease,
+        box-shadow 0.20s ease,
+        filter 0.20s ease;
 }
 
 
 .attendance-button:hover {
+    filter:
+        brightness(1.10);
 
-    background:
-        linear-gradient(
-            to bottom,
-            #a33b2c,
-            #752018
-        );
+    transform:
+        translateY(-2px);
 
     box-shadow:
-        0 8px 18px rgba(0, 0, 0, 0.4);
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.34);
 }
 
 
 .attendance-button:active {
-
     transform:
-        translateY(2px);
+        translateY(1px);
 }
 
 
 .button-icon {
-
-    margin:
-        0 10px;
-
     color:
         var(--gold-light);
+
+    font-size:
+        0.9em;
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
-
 .date {
-
-    position: absolute;
-
-    top: 78%;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 60%;
+    align-self: end;
 
     text-align: center;
 
     color:
         #4b2617;
-
-    z-index: 5;
 }
 
 
 .date-main {
-
     display: block;
 
     font-family:
@@ -564,24 +603,25 @@ body {
         serif;
 
     font-size:
-        clamp(18px, 2vw, 26px);
+        clamp(20px, 2.1vw, 28px);
 
     font-weight: 600;
 
-    letter-spacing: 3px;
+    letter-spacing:
+        clamp(2px, 0.35vw, 5px);
 }
 
 
 .date-place {
-
     display: block;
 
-    margin-top: 4px;
+    margin-top: 5px;
 
     font-size:
-        clamp(14px, 1.5vw, 19px);
+        clamp(13px, 1.4vw, 18px);
 
-    letter-spacing: 4px;
+    letter-spacing:
+        clamp(3px, 0.45vw, 6px);
 }
 
 
@@ -589,50 +629,52 @@ body {
    QUESTIONNAIRE
 ========================================================= */
 
-.questionnaire-card {
+.questionnaire-layout {
+    position: relative;
 
-    display: flex;
+    z-index: 5;
 
-    flex-direction: column;
+    width: 100%;
+    height: 100%;
 
-    align-items: center;
+    display: grid;
 
-    justify-content: flex-start;
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto;
 
     padding:
-        7% 9%;
-
-    overflow-y: auto;
+        clamp(48px, 6vh, 70px)
+        clamp(64px, 9vw, 130px)
+        clamp(42px, 5vh, 62px);
 }
 
 
+/* =========================================================
+   EN-TÊTE QUESTIONNAIRE
+========================================================= */
+
 .questionnaire-heading {
-
-    width: 100%;
-
     text-align: center;
-
-    z-index: 5;
 }
 
 
 .mini-ornament {
+    margin-bottom: 7px;
 
-    margin-bottom: 8px;
+    font-size:
+        clamp(17px, 2vw, 23px);
+
+    line-height: 1;
 
     color:
         var(--gold);
-
-    font-size: 22px;
-
-    text-align: center;
 }
 
 
 .questionnaire-title {
-
-    margin:
-        0 0 8px;
+    margin: 0;
 
     font-family:
         "Cormorant Garamond",
@@ -640,28 +682,33 @@ body {
         serif;
 
     font-size:
-        clamp(34px, 4vw, 52px);
+        clamp(36px, 4.3vw, 58px);
 
     line-height: 0.95;
+
+    font-weight: 700;
 
     letter-spacing: 1px;
 
     text-transform: uppercase;
 
     color:
-        #3a1b10;
+        #35170e;
 }
 
 
 .subtitle {
-
-    width: 80%;
+    width:
+        min(
+            85%,
+            680px
+        );
 
     margin:
-        0 auto;
+        9px auto 0;
 
     font-size:
-        clamp(15px, 1.5vw, 20px);
+        clamp(15px, 1.4vw, 19px);
 
     line-height: 1.35;
 
@@ -670,59 +717,85 @@ body {
 }
 
 
-.questionnaire-card > .ornament-divider {
+.questionnaire-heading .ornament-divider {
+    margin-top:
+        clamp(14px, 2vh, 22px);
 
-    position: relative;
-
-    left: auto;
-
-    top: auto;
-
-    transform: none;
-
-    width: 70%;
-
-    margin:
-        18px auto 12px;
+    margin-bottom: 0;
 }
 
 
 /* =========================================================
-   QUESTION
+   ZONE CENTRALE QUESTION
 ========================================================= */
 
+.question-stage {
+    min-height: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        clamp(12px, 2vh, 22px)
+        0;
+}
+
+
 .question-container {
+    width:
+        min(
+            100%,
+            760px
+        );
 
-    width: 100%;
-
-    max-width: 700px;
-
-    margin:
-        5px auto 0;
+    margin: 0 auto;
 
     text-align: center;
 
     color:
         #32170e;
 
-    z-index: 5;
+    animation:
+        questionAppear 0.25s ease both;
+}
+
+
+@keyframes questionAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
 }
 
 
 .question-number {
-
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size: 14px;
+    font-size:
+        clamp(11px, 1vw, 14px);
 
     font-weight: 700;
 
-    letter-spacing: 3px;
+    letter-spacing:
+        clamp(2px, 0.25vw, 4px);
 
     color:
         var(--gold);
@@ -732,9 +805,15 @@ body {
 
 
 .question-title {
+    width:
+        min(
+            100%,
+            730px
+        );
 
     margin:
-        0 auto 20px;
+        0 auto
+        clamp(14px, 2vh, 22px);
 
     font-family:
         "Cormorant Garamond",
@@ -742,9 +821,9 @@ body {
         serif;
 
     font-size:
-        clamp(25px, 2.8vw, 36px);
+        clamp(24px, 2.7vw, 37px);
 
-    line-height: 1.1;
+    line-height: 1.08;
 
     font-weight: 700;
 
@@ -760,31 +839,43 @@ body {
 ========================================================= */
 
 .answers {
+    width:
+        min(
+            100%,
+            700px
+        );
 
-    display: flex;
+    margin:
+        0 auto;
 
-    flex-direction: column;
+    display: grid;
 
-    gap: 10px;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
-    width: 100%;
+    gap:
+        clamp(8px, 1.2vh, 12px)
+        clamp(9px, 1.2vw, 14px);
 }
 
 
 .answer-button {
-
-    width: 100%;
-
-    min-height: 52px;
+    min-height:
+        clamp(48px, 5.6vh, 58px);
 
     padding:
-        12px 18px;
+        9px
+        clamp(12px, 1.5vw, 18px);
 
     border:
         1px solid #987144;
 
+    border-radius: 1px;
+
+    cursor: pointer;
+
     background:
-        rgba(232, 205, 153, 0.92);
+        rgba(232, 205, 153, 0.88);
 
     color:
         #32170e;
@@ -795,37 +886,42 @@ body {
         serif;
 
     font-size:
-        clamp(18px, 1.8vw, 22px);
+        clamp(16px, 1.45vw, 20px);
+
+    line-height: 1.15;
 
     font-weight: 600;
 
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        color 0.2s ease;
-
     box-shadow:
         0 2px 5px rgba(0, 0, 0, 0.08);
+
+    transition:
+        background 0.18s ease,
+        transform 0.14s ease,
+        box-shadow 0.18s ease,
+        color 0.18s ease;
 }
 
 
 .answer-button:hover {
-
     background:
-        rgba(211, 171, 101, 0.9);
+        rgba(217, 181, 116, 0.96);
+
+    transform:
+        translateY(-1px);
 
     box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.16);
+        0 4px 10px rgba(0, 0, 0, 0.14);
 }
 
 
 .answer-button.selected {
+    border-color:
+        #4c1b12;
 
     background:
         linear-gradient(
-            to bottom,
+            180deg,
             #8c3024,
             #651c15
         );
@@ -833,11 +929,9 @@ body {
     color:
         #f3d995;
 
-    border-color:
-        #4c1b12;
-
     box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.25);
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.22);
 }
 
 
@@ -846,21 +940,34 @@ body {
 ========================================================= */
 
 .text-input {
+    display: block;
 
-    width: 100%;
+    width:
+        min(
+            100%,
+            700px
+        );
 
-    min-height: 100px;
+    min-height:
+        clamp(105px, 14vh, 145px);
 
-    resize: vertical;
+    max-height: 190px;
+
+    margin:
+        0 auto;
+
+    resize: none;
 
     padding:
-        14px 16px;
+        15px 17px;
 
     border:
         1px solid #88683d;
 
+    border-radius: 1px;
+
     background:
-        rgba(244, 224, 180, 0.92);
+        rgba(244, 224, 180, 0.88);
 
     color:
         #30160e;
@@ -870,7 +977,8 @@ body {
         Georgia,
         serif;
 
-    font-size: 19px;
+    font-size:
+        clamp(16px, 1.5vw, 19px);
 
     line-height: 1.4;
 
@@ -878,54 +986,66 @@ body {
 
     box-shadow:
         inset 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
 }
 
 
 .text-input::placeholder {
-
     color:
-        rgba(48, 22, 14, 0.55);
+        rgba(48, 22, 14, 0.52);
 }
 
 
 .text-input:focus {
-
     border-color:
         #762419;
 
+    background:
+        rgba(247, 229, 188, 0.94);
+
     box-shadow:
-        0 0 0 2px rgba(118, 36, 25, 0.15);
+        0 0 0 2px rgba(118, 36, 25, 0.13),
+        inset 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 
 /* =========================================================
-   PROGRESSION
+   FOOTER QUESTIONNAIRE
 ========================================================= */
 
-.progress-section {
-
+.questionnaire-footer {
     width: 100%;
+}
 
-    max-width: 700px;
+
+.progress-section {
+    width:
+        min(
+            100%,
+            760px
+        );
 
     margin:
-        20px auto 0;
-
-    z-index: 5;
+        0 auto;
 }
 
 
 .progress-label {
-
     display: flex;
 
+    align-items: center;
     justify-content: space-between;
 
-    align-items: center;
+    gap: 15px;
 
     margin-bottom: 6px;
 
-    font-size: 13px;
+    font-size:
+        clamp(10px, 1vw, 13px);
 
     font-weight: 700;
 
@@ -937,10 +1057,10 @@ body {
 
 
 .progress-bar-wrapper {
-
     width: 100%;
-
     height: 7px;
+
+    overflow: hidden;
 
     border:
         1px solid #765128;
@@ -951,63 +1071,62 @@ body {
 
 
 .progress-bar {
-
     width: 0%;
-
     height: 100%;
 
     background:
-        #752117;
+        linear-gradient(
+            to right,
+            #681d16,
+            #963428
+        );
 
     transition:
         width 0.3s ease;
 }
 
 
-.progress-text {
-
-    font-size: 13px;
-
-    letter-spacing: 0;
-
-    font-weight: 400;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
 .navigation {
-
-    width: 100%;
-
-    max-width: 700px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
+    width:
+        min(
+            100%,
+            760px
+        );
 
     margin:
-        18px auto 0;
+        clamp(12px, 1.8vh, 18px)
+        auto
+        0;
 
-    z-index: 5;
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        clamp(12px, 2vw, 24px);
 }
 
 
 .nav-button {
-
-    min-width: 150px;
+    min-height:
+        clamp(46px, 5vh, 54px);
 
     padding:
-        11px 20px;
+        10px
+        clamp(15px, 2vw, 24px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
 
     border:
         1px solid #5c311d;
+
+    border-radius: 1px;
 
     cursor: pointer;
 
@@ -1016,21 +1135,23 @@ body {
         Georgia,
         serif;
 
-    font-size: 17px;
+    font-size:
+        clamp(15px, 1.4vw, 18px);
 
     font-weight: 600;
 
+    letter-spacing: 0.4px;
+
     transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.15s ease;
+        transform 0.15s ease,
+        filter 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
 
 .nav-button.previous {
-
     background:
-        rgba(229, 205, 160, 0.95);
+        rgba(229, 205, 160, 0.93);
 
     color:
         #402117;
@@ -1038,10 +1159,9 @@ body {
 
 
 .nav-button.next {
-
     background:
         linear-gradient(
-            to bottom,
+            180deg,
             #8c3024,
             #651c15
         );
@@ -1051,26 +1171,25 @@ body {
 }
 
 
-.nav-button:hover {
+.nav-button:hover:not(:disabled) {
+    filter:
+        brightness(1.08);
 
     box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.2);
+        0 4px 10px rgba(0, 0, 0, 0.19);
 }
 
 
-.nav-button:active {
-
+.nav-button:active:not(:disabled) {
     transform:
-        translateY(2px);
+        translateY(1px);
 }
 
 
 .nav-button:disabled {
+    opacity: 0.60;
 
-    opacity: 0.65;
-
-    cursor:
-        wait;
+    cursor: wait;
 }
 
 
@@ -1079,26 +1198,34 @@ body {
 ========================================================= */
 
 .success-card {
-
     display: flex;
 
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
-    text-align: center;
-
-    padding:
-        8% 12%;
 }
 
 
-.success-card h2 {
+.success-content {
+    position: relative;
 
+    z-index: 5;
+
+    width:
+        min(
+            78%,
+            760px
+        );
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+.success-content h2 {
     margin:
-        10px 0 18px;
+        10px 0
+        clamp(15px, 2vh, 22px);
 
     font-family:
         "Cormorant Garamond",
@@ -1106,45 +1233,39 @@ body {
         serif;
 
     font-size:
-        clamp(34px, 4vw, 58px);
+        clamp(39px, 5vw, 66px);
 
-    line-height: 0.95;
+    line-height: 0.92;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
 
     color:
         #3a1b10;
-
-    text-transform:
-        uppercase;
 }
 
 
-.success-card .ornament-divider {
-
-    position: relative;
-
-    left: auto;
-
-    top: auto;
-
-    transform: none;
+.success-content .ornament-divider {
+    width: 70%;
 
     margin:
-        0 auto 25px;
-
-    width: 65%;
+        0 auto
+        clamp(20px, 3vh, 30px);
 }
 
 
 .small-title {
-
     margin:
         0 0 10px;
 
-    font-size: 14px;
+    font-size:
+        clamp(11px, 1.15vw, 14px);
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        clamp(1.5px, 0.2vw, 3px);
 
     color:
         var(--gold);
@@ -1152,14 +1273,13 @@ body {
 
 
 .success-text {
-
-    max-width: 620px;
+    max-width: 660px;
 
     margin:
         8px auto;
 
     font-size:
-        clamp(18px, 1.8vw, 23px);
+        clamp(17px, 1.7vw, 23px);
 
     line-height: 1.4;
 
@@ -1169,23 +1289,27 @@ body {
 
 
 .final-message {
+    margin:
+        clamp(18px, 3vh, 28px)
+        0
+        0;
 
-    margin-top: 25px;
-
-    font-size: 19px;
+    font-size:
+        clamp(16px, 1.5vw, 20px);
 }
 
 
 .final-signature {
-
-    margin-top: 4px;
+    margin:
+        4px 0 0;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size: 32px;
+    font-size:
+        clamp(27px, 3vw, 37px);
 
     font-weight: 700;
 
@@ -1195,46 +1319,37 @@ body {
 
 
 /* =========================================================
-   TABLETTE
+   TABLETTES
 ========================================================= */
 
-@media (max-width: 900px) {
-
-    .stone-background {
-        padding: 10px;
-    }
-
-
-    .screen {
-        padding: 10px;
-    }
-
+@media (max-width: 1000px) {
 
     .parchment {
-        width: 96vw;
+        width:
+            calc(100vw - 24px);
+
+        height:
+            calc(100dvh - 24px);
+
+        min-height: 580px;
     }
 
 
-    .attendance-buttons {
-        width: 76%;
-
-        gap: 15px;
-    }
-
-
-    .attendance-button {
+    .intro-content {
         padding:
-            12px 10px;
-
-        font-size:
-            clamp(14px, 2vw, 19px);
+            clamp(50px, 7vh, 70px)
+            clamp(48px, 8vw, 90px)
+            clamp(45px, 6vh, 65px);
     }
 
 
-    .questionnaire-card {
+    .questionnaire-layout {
         padding:
-            7% 8%;
+            clamp(45px, 6vh, 62px)
+            clamp(54px, 8vw, 85px)
+            clamp(38px, 5vh, 55px);
     }
+
 }
 
 
@@ -1244,307 +1359,474 @@ body {
 
 @media (max-width: 700px) {
 
-    .stone-background {
+    body {
+        background:
+            #17130f;
+    }
+
+
+    .screen {
         padding: 5px;
 
         align-items: flex-start;
     }
 
 
-    .screen {
-        min-height: 100vh;
-
-        padding: 5px;
-    }
-
-
     .parchment {
-        width: 98vw;
+        width:
+            calc(100vw - 10px);
+
+        height:
+            calc(100dvh - 10px);
+
+        min-height: 560px;
+
+        box-shadow:
+            0 12px 35px rgba(0, 0, 0, 0.42);
     }
 
 
-    /* PAGE D'ACCUEIL */
+    .inner-border {
+        inset:
+            clamp(20px, 5vw, 28px);
+    }
+
+
+    .corner-tl {
+        top:
+            clamp(20px, 5vw, 28px);
+
+        left:
+            clamp(20px, 5vw, 28px);
+    }
+
+
+    .corner-tr {
+        top:
+            clamp(20px, 5vw, 28px);
+
+        right:
+            clamp(20px, 5vw, 28px);
+    }
+
+
+    .corner-bl {
+        bottom:
+            clamp(20px, 5vw, 28px);
+
+        left:
+            clamp(20px, 5vw, 28px);
+    }
+
+
+    .corner-br {
+        right:
+            clamp(20px, 5vw, 28px);
+
+        bottom:
+            clamp(20px, 5vw, 28px);
+    }
+
+
+    /* ----------------------------
+       ACCUEIL MOBILE
+    ----------------------------- */
+
+    .intro-content {
+        padding:
+            clamp(42px, 7vh, 60px)
+            clamp(30px, 9vw, 55px)
+            clamp(36px, 6vh, 52px);
+    }
+
 
     .ornament-top {
-        top: 9%;
-
-        width: 55%;
+        width: 65%;
     }
 
 
-    .intro-card h1 {
-
-        top: 29%;
-
-        width: 84%;
-
+    .intro-title {
         font-size:
-            clamp(27px, 7vw, 43px);
+            clamp(39px, 11vw, 58px);
+
+        line-height: 0.88;
     }
 
 
     .intro-text {
-
-        top: 43%;
-
-        width: 80%;
+        margin-top: 23px;
 
         font-size:
-            clamp(14px, 4vw, 20px);
+            clamp(15px, 4vw, 19px);
 
-        line-height: 1.3;
+        line-height: 1.34;
     }
 
 
-    .intro-card .ornament-divider {
+    .desktop-break {
+        display: none;
+    }
 
-        top: 57%;
+
+    .intro-main .ornament-divider {
+        width: 75%;
+
+        margin:
+            clamp(18px, 2.5vh, 25px)
+            auto;
     }
 
 
     .attendance-buttons {
+        grid-template-columns: 1fr;
 
-        top: 62%;
+        width:
+            min(
+                100%,
+                420px
+            );
 
-        width: 82%;
-
-        gap: 8px;
+        gap: 10px;
     }
 
 
     .attendance-button {
-
-        width:
-            calc(50% - 4px);
-
-        min-height: 48px;
-
-        padding:
-            9px 5px;
+        min-height: 51px;
 
         font-size:
-            clamp(11px, 3.5vw, 16px);
-
-        letter-spacing:
-            0.3px;
-    }
-
-
-    .button-icon {
-
-        margin:
-            0 4px;
-    }
-
-
-    .date {
-
-        top: 77%;
-
-        width: 75%;
+            clamp(15px, 4.1vw, 18px);
     }
 
 
     .date-main {
-
         font-size:
-            clamp(14px, 4vw, 20px);
-
-        letter-spacing: 2px;
+            clamp(18px, 5vw, 23px);
     }
 
 
     .date-place {
-
         font-size:
-            clamp(11px, 3vw, 16px);
-
-        letter-spacing: 3px;
+            clamp(12px, 3.3vw, 15px);
     }
 
 
-    /* QUESTIONNAIRE */
+    /* ----------------------------
+       QUESTIONNAIRE MOBILE
+    ----------------------------- */
 
-    .questionnaire-card {
-
+    .questionnaire-layout {
         padding:
-            7% 8%;
+            clamp(35px, 5.7vh, 49px)
+            clamp(29px, 8vw, 46px)
+            clamp(28px, 4.2vh, 40px);
     }
 
 
     .questionnaire-title {
-
         font-size:
-            clamp(28px, 7vw, 38px);
+            clamp(30px, 8vw, 39px);
     }
 
 
     .subtitle {
-
-        width: 90%;
+        width: 92%;
 
         font-size:
-            clamp(13px, 3.5vw, 17px);
+            clamp(13px, 3.5vw, 16px);
     }
 
 
-    .questionnaire-card > .ornament-divider {
-
+    .questionnaire-heading .ornament-divider {
         width: 75%;
-
-        margin-top: 12px;
     }
 
 
-    .question-title {
-
-        font-size:
-            clamp(22px, 6vw, 30px);
-
-        margin-bottom: 15px;
-    }
-
-
-    .answer-button {
-
-        min-height: 48px;
-
+    .question-stage {
         padding:
-            10px 12px;
-
-        font-size:
-            clamp(16px, 4.5vw, 20px);
-    }
-
-
-    .text-input {
-
-        min-height: 90px;
-
-        font-size: 17px;
-    }
-
-
-    .navigation {
-
-        gap: 8px;
-
-        margin-top: 12px;
-    }
-
-
-    .nav-button {
-
-        min-width: 0;
-
-        flex: 1;
-
-        padding:
-            10px 12px;
-
-        font-size: 15px;
-    }
-
-
-    /* FINAL */
-
-    .success-card {
-
-        padding:
-            8% 10%;
-    }
-
-
-    .success-card h2 {
-
-        font-size:
-            clamp(30px, 7vw, 42px);
-    }
-
-
-    .success-text {
-
-        font-size:
-            clamp(16px, 4vw, 20px);
-    }
-}
-
-
-/* =========================================================
-   TRÈS PETITS TÉLÉPHONES
-========================================================= */
-
-@media (max-width: 450px) {
-
-    .attendance-buttons {
-
-        width: 86%;
-
-        gap: 6px;
-    }
-
-
-    .attendance-button {
-
-        padding:
-            8px 3px;
-
-        font-size:
-            clamp(10px, 3.1vw, 14px);
-    }
-
-
-    .button-icon {
-
-        margin:
-            0 2px;
-    }
-
-
-    .intro-card h1 {
-
-        font-size:
-            clamp(23px, 7vw, 32px);
-    }
-
-
-    .intro-text {
-
-        font-size:
-            clamp(12px, 3.8vw, 16px);
-    }
-
-
-    .questionnaire-card {
-
-        padding:
-            6% 7%;
+            clamp(8px, 1.4vh, 15px)
+            0;
     }
 
 
     .question-number {
+        margin-bottom: 5px;
 
-        font-size: 11px;
-
-        letter-spacing: 2px;
+        font-size:
+            clamp(10px, 2.7vw, 12px);
     }
 
 
     .question-title {
+        margin-bottom:
+            clamp(10px, 1.5vh, 15px);
 
         font-size:
-            clamp(20px, 5.5vw, 26px);
+            clamp(20px, 5.5vw, 27px);
+
+        line-height: 1.05;
+    }
+
+
+    .answers {
+        grid-template-columns: 1fr;
+
+        gap:
+            clamp(6px, 1vh, 9px);
+    }
+
+
+    .answer-button {
+        min-height:
+            clamp(40px, 5.3vh, 48px);
+
+        padding:
+            7px 10px;
+
+        font-size:
+            clamp(15px, 4vw, 18px);
+    }
+
+
+    .text-input {
+        min-height:
+            clamp(90px, 13vh, 120px);
+
+        padding:
+            12px 13px;
+
+        font-size:
+            16px;
     }
 
 
     .progress-label {
+        font-size:
+            clamp(9px, 2.6vw, 11px);
+    }
 
-        font-size: 10px;
+
+    .navigation {
+        gap: 8px;
+
+        margin-top: 10px;
     }
 
 
     .nav-button {
+        min-height: 43px;
 
-        font-size: 13px;
+        padding:
+            8px 9px;
+
+        font-size:
+            clamp(13px, 3.5vw, 15px);
     }
+
+
+    /* ----------------------------
+       FINAL MOBILE
+    ----------------------------- */
+
+    .success-content {
+        width: 78%;
+    }
+
+
+    .success-content h2 {
+        font-size:
+            clamp(30px, 8.5vw, 42px);
+    }
+
+
+    .success-text {
+        font-size:
+            clamp(15px, 4vw, 18px);
+    }
+
+
+    .final-signature {
+        font-size:
+            clamp(24px, 7vw, 31px);
+    }
+
+}
+
+
+/* =========================================================
+   PETITS TÉLÉPHONES
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .intro-content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+    .questionnaire-layout {
+        padding-left: 29px;
+        padding-right: 29px;
+    }
+
+
+    .question-title {
+        font-size:
+            clamp(18px, 5.3vw, 23px);
+    }
+
+
+    .answer-button {
+        font-size:
+            clamp(14px, 3.8vw, 16px);
+    }
+
+
+    .nav-button {
+        font-size:
+            12px;
+    }
+
+}
+
+
+/* =========================================================
+   ÉCRANS PEU HAUTS
+   PC portable / téléphone paysage
+========================================================= */
+
+@media (max-height: 720px) {
+
+    .parchment {
+        min-height: 0;
+    }
+
+
+    .intro-content {
+        padding-top: 38px;
+        padding-bottom: 32px;
+    }
+
+
+    .intro-title {
+        font-size:
+            clamp(38px, 7vh, 58px);
+    }
+
+
+    .intro-text {
+        margin-top: 16px;
+
+        font-size:
+            clamp(14px, 2.7vh, 19px);
+    }
+
+
+    .intro-main .ornament-divider {
+        margin:
+            14px auto;
+    }
+
+
+    .attendance-button {
+        min-height: 44px;
+    }
+
+
+    .questionnaire-layout {
+        padding-top: 30px;
+        padding-bottom: 25px;
+    }
+
+
+    .questionnaire-title {
+        font-size:
+            clamp(29px, 6vh, 42px);
+    }
+
+
+    .subtitle {
+        font-size:
+            clamp(12px, 2.3vh, 16px);
+    }
+
+
+    .questionnaire-heading .ornament-divider {
+        margin-top: 8px;
+    }
+
+
+    .question-title {
+        font-size:
+            clamp(19px, 4.2vh, 29px);
+
+        margin-bottom: 9px;
+    }
+
+
+    .answer-button {
+        min-height: 38px;
+    }
+
+
+    .text-input {
+        min-height: 75px;
+    }
+
+
+    .navigation {
+        margin-top: 8px;
+    }
+
+
+    .nav-button {
+        min-height: 40px;
+    }
+
+}
+
+
+/* =========================================================
+   CLAVIER MOBILE / CONTENU EXCEPTIONNELLEMENT TROP GRAND
+========================================================= */
+
+@media (max-height: 580px) {
+
+    .screen {
+        overflow-y: auto;
+    }
+
+
+    .parchment {
+        height: auto;
+
+        min-height: 570px;
+    }
+
+
+    .questionnaire-layout {
+        min-height: 570px;
+    }
+
+}
+
+
+/* =========================================================
+   RÉDUCTION DES ANIMATIONS
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
 }
