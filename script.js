@@ -1,14 +1,6 @@
-/* =========================================================
-   GOOGLE SHEETS
-========================================================= */
-
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbxUR9o_iIO5gFRKaVz_8MiDOCdX2VDuQQSdKyRm9_OJ5XMGla9lhvc_ajmMfLoOp6Xf/exec";
 
-
-/* =========================================================
-   QUESTIONS
-========================================================= */
 
 const questions = [
 
@@ -64,11 +56,10 @@ const questions = [
 
         symbol: "⚔",
 
-        menu:
-            true,
+        menu: true,
 
         title:
-            "Quel mets conviendra à votre noble personne ?",
+            "Quel mets allez-vous choisir ?",
 
         answers: [
             "🍖  Menu classique",
@@ -124,75 +115,38 @@ const questions = [
 ];
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+let currentQuestion = 0;
+let answers = [];
+let declined = false;
+let sending = false;
 
-let currentQuestion =
-    0;
-
-let answers =
-    [];
-
-let declined =
-    false;
-
-let sending =
-    false;
-
-
-/* =========================================================
-   DOM
-========================================================= */
 
 const intro =
-    document.getElementById(
-        "intro"
-    );
+    document.getElementById("intro");
 
 const questionnaire =
-    document.getElementById(
-        "questionnaire"
-    );
+    document.getElementById("questionnaire");
 
 const success =
-    document.getElementById(
-        "success"
-    );
+    document.getElementById("success");
 
 const questionContainer =
-    document.getElementById(
-        "question-container"
-    );
+    document.getElementById("question-container");
 
 const progressBar =
-    document.getElementById(
-        "progress-bar"
-    );
+    document.getElementById("progress-bar");
 
 const previousButton =
-    document.getElementById(
-        "previous-button"
-    );
+    document.getElementById("previous-button");
 
 const nextButton =
-    document.getElementById(
-        "next-button"
-    );
+    document.getElementById("next-button");
 
 const successContent =
-    document.getElementById(
-        "success-content"
-    );
+    document.getElementById("success-content");
 
 
-/* =========================================================
-   CHANGER D'ÉCRAN
-========================================================= */
-
-function showScreen(
-    target
-) {
+function showScreen(target) {
 
     [
         intro,
@@ -223,43 +177,29 @@ function showScreen(
 }
 
 
-/* =========================================================
-   PRÉSENCE
-========================================================= */
+function chooseAttendance(choice) {
 
-function chooseAttendance(
-    choice
-) {
-
-    answers =
-        [];
+    answers = [];
 
 
-    if (
-        choice === "oui"
-    ) {
+    if (choice === "oui") {
 
-        answers[0] =
-            "Oui";
+        answers[0] = "Oui";
 
-        declined =
-            false;
+        declined = false;
 
     }
 
     else {
 
-        answers[0] =
-            "Non";
+        answers[0] = "Non";
 
-        declined =
-            true;
+        declined = true;
 
     }
 
 
-    currentQuestion =
-        0;
+    currentQuestion = 0;
 
 
     showScreen(
@@ -272,25 +212,15 @@ function chooseAttendance(
 }
 
 
-/* =========================================================
-   AFFICHER LA QUESTION
-========================================================= */
-
 function showQuestion() {
 
     const question =
-        questions[
-            currentQuestion
-        ];
+        questions[currentQuestion];
 
 
     questionContainer.innerHTML =
         "";
 
-
-    /* --------------------------
-       NUMÉRO
-    -------------------------- */
 
     const number =
         document.createElement(
@@ -317,10 +247,6 @@ function showQuestion() {
     );
 
 
-    /* --------------------------
-       TITRE
-    -------------------------- */
-
     const title =
         document.createElement(
             "h2"
@@ -340,13 +266,7 @@ function showQuestion() {
     );
 
 
-    /* --------------------------
-       SYMBOLE
-    -------------------------- */
-
-    if (
-        question.symbol
-    ) {
+    if (question.symbol) {
 
         const symbol =
             document.createElement(
@@ -369,13 +289,7 @@ function showQuestion() {
     }
 
 
-    /* --------------------------
-       TEXTE D'AIDE
-    -------------------------- */
-
-    if (
-        question.help
-    ) {
+    if (question.help) {
 
         const help =
             document.createElement(
@@ -398,13 +312,7 @@ function showQuestion() {
     }
 
 
-    /* --------------------------
-       CHOIX
-    -------------------------- */
-
-    if (
-        question.type === "choice"
-    ) {
+    if (question.type === "choice") {
 
         const answerContainer =
             document.createElement(
@@ -460,8 +368,7 @@ function showQuestion() {
 
                         answers[
                             currentQuestion + 1
-                        ] =
-                            answer;
+                        ] = answer;
 
 
                         answerContainer
@@ -502,13 +409,7 @@ function showQuestion() {
     }
 
 
-    /* --------------------------
-       TEXTE
-    -------------------------- */
-
-    if (
-        question.type === "text"
-    ) {
+    if (question.type === "text") {
 
         const input =
             document.createElement(
@@ -559,10 +460,6 @@ function showQuestion() {
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
 function updateFooter() {
 
     const total =
@@ -583,11 +480,6 @@ function updateFooter() {
     progressBar.style.width =
         `${progress}%`;
 
-
-    /*
-       RETOUR garde son espace,
-       il devient seulement invisible.
-    */
 
     previousButton.style.visibility =
         currentQuestion === 0
@@ -618,10 +510,6 @@ function updateFooter() {
 }
 
 
-/* =========================================================
-   VALIDATION
-========================================================= */
-
 function answerIsValid() {
 
     const value =
@@ -630,12 +518,8 @@ function answerIsValid() {
         ];
 
 
-    if (
-        value === undefined
-    ) {
-
+    if (value === undefined) {
         return false;
-
     }
 
 
@@ -656,24 +540,14 @@ function answerIsValid() {
 }
 
 
-/* =========================================================
-   SUIVANT
-========================================================= */
-
 function nextQuestion() {
 
-    if (
-        sending
-    ) {
-
+    if (sending) {
         return;
-
     }
 
 
-    if (
-        !answerIsValid()
-    ) {
+    if (!answerIsValid()) {
 
         alert(
             "Votre réponse est attendue avant de poursuivre."
@@ -684,9 +558,7 @@ function nextQuestion() {
     }
 
 
-    if (
-        declined
-    ) {
+    if (declined) {
 
         submitDecline();
 
@@ -709,24 +581,15 @@ function nextQuestion() {
 
     currentQuestion++;
 
-
     showQuestion();
 
 }
 
 
-/* =========================================================
-   RETOUR
-========================================================= */
-
 function previousQuestion() {
 
-    if (
-        sending
-    ) {
-
+    if (sending) {
         return;
-
     }
 
 
@@ -736,7 +599,6 @@ function previousQuestion() {
 
         currentQuestion--;
 
-
         showQuestion();
 
     }
@@ -744,13 +606,7 @@ function previousQuestion() {
 }
 
 
-/* =========================================================
-   GOOGLE SHEETS
-========================================================= */
-
-async function sendData(
-    data
-) {
+async function sendData(data) {
 
     await fetch(
         GOOGLE_SCRIPT_URL,
@@ -770,9 +626,7 @@ async function sendData(
             },
 
             body:
-                JSON.stringify(
-                    data
-                )
+                JSON.stringify(data)
 
         }
     );
@@ -780,19 +634,12 @@ async function sendData(
 }
 
 
-/* =========================================================
-   ABSENT
-========================================================= */
-
 async function submitDecline() {
 
-    sending =
-        true;
+    sending = true;
 
 
-    nextButton.disabled =
-        true;
-
+    nextButton.disabled = true;
 
     nextButton.textContent =
         "TRANSMISSION…";
@@ -829,28 +676,18 @@ async function submitDecline() {
 
     try {
 
-        await sendData(
-            data
-        );
-
+        await sendData(data);
 
         showDeclineSuccess();
 
-
-        showScreen(
-            success
-        );
+        showScreen(success);
 
     }
 
 
-    catch (
-        error
-    ) {
+    catch (error) {
 
-        console.error(
-            error
-        );
+        console.error(error);
 
 
         alert(
@@ -858,13 +695,9 @@ async function submitDecline() {
         );
 
 
-        sending =
-            false;
+        sending = false;
 
-
-        nextButton.disabled =
-            false;
-
+        nextButton.disabled = false;
 
         updateFooter();
 
@@ -873,19 +706,12 @@ async function submitDecline() {
 }
 
 
-/* =========================================================
-   PRÉSENT
-========================================================= */
-
 async function submitAttendance() {
 
-    sending =
-        true;
+    sending = true;
 
 
-    nextButton.disabled =
-        true;
-
+    nextButton.disabled = true;
 
     nextButton.textContent =
         "SCELLEMENT…";
@@ -922,28 +748,18 @@ async function submitAttendance() {
 
     try {
 
-        await sendData(
-            data
-        );
-
+        await sendData(data);
 
         showPositiveSuccess();
 
-
-        showScreen(
-            success
-        );
+        showScreen(success);
 
     }
 
 
-    catch (
-        error
-    ) {
+    catch (error) {
 
-        console.error(
-            error
-        );
+        console.error(error);
 
 
         alert(
@@ -951,13 +767,9 @@ async function submitAttendance() {
         );
 
 
-        sending =
-            false;
+        sending = false;
 
-
-        nextButton.disabled =
-            false;
-
+        nextButton.disabled = false;
 
         updateFooter();
 
@@ -965,10 +777,6 @@ async function submitAttendance() {
 
 }
 
-
-/* =========================================================
-   CONFIRMATION PRÉSENT
-========================================================= */
 
 function showPositiveSuccess() {
 
@@ -983,51 +791,37 @@ function showPositiveSuccess() {
 
 
         <div class="divider">
-
             <span></span>
             <i>◆</i>
             <span></span>
-
         </div>
 
 
         <p class="success-text">
-
             Merci d'avoir répondu
             à notre invitation.
-
         </p>
 
 
         <p class="success-text">
-
             Nous avons hâte de partager
             cette journée avec vous.
-
         </p>
 
 
         <p class="final-message">
-
             Avec toute notre affection,
-
         </p>
 
 
         <p class="final-signature">
-
             Julie & Loïc
-
         </p>
 
     `;
 
 }
 
-
-/* =========================================================
-   CONFIRMATION ABSENT
-========================================================= */
 
 function showDeclineSuccess() {
 
@@ -1042,42 +836,32 @@ function showDeclineSuccess() {
 
 
         <div class="divider">
-
             <span></span>
             <i>◆</i>
             <span></span>
-
         </div>
 
 
         <p class="success-text">
-
             Merci d'avoir pris le temps
             de nous répondre.
-
         </p>
 
 
         <p class="success-text">
-
             Votre présence nous manquera,
             mais nous penserons bien à vous
             lors de cette journée.
-
         </p>
 
 
         <p class="final-message">
-
             Avec toute notre affection,
-
         </p>
 
 
         <p class="final-signature">
-
             Julie & Loïc
-
         </p>
 
     `;
