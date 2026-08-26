@@ -9,14 +9,10 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <meta
-        name="theme-color"
-        content="#17130f"
-    >
+    <meta name="theme-color" content="#0d0b09">
 
     <title>Julie & Loïc — Répondez à l'appel</title>
 
-    <!-- POLICES -->
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -33,109 +29,130 @@
         rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
 
-<div class="site-shell">
+<div class="app">
 
 
     <!-- =====================================================
-         PAGE D'ACCUEIL
+         ACCUEIL
     ====================================================== -->
 
-    <main
-        id="intro"
-        class="screen active"
-    >
+    <main id="intro" class="screen active">
 
-        <section class="parchment intro-card">
+        <section class="parchment">
 
-            <!-- DÉCOR -->
-            <div class="inner-border"></div>
+            <div class="safe-zone intro-layout">
 
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
+                <div class="intro-spacer"></div>
 
 
-            <!-- CONTENU -->
-            <div class="intro-content">
+                <section class="intro-content">
 
-                <div class="ornament-top">
-                    <span class="ornament-leaf"></span>
-                    <span class="ornament-line-short"></span>
-                    <span class="ornament-diamond">◆</span>
-                    <span class="ornament-line-short"></span>
-                    <span class="ornament-leaf"></span>
-                </div>
-
-
-                <div class="intro-main">
-
-                    <h1 class="intro-title">
-                        <span>RÉPONDEZ À</span>
-                        <span>L'APPEL</span>
+                    <h1>
+                        RÉPONDEZ
+                        <br>
+                        À L'APPEL
                     </h1>
 
 
-                    <p class="intro-text">
-                        Julie & Loïc vous convient à célébrer leur union
-                        <br class="desktop-break">
-                        lors d'une soirée mémorable !
-                    </p>
-
-
-                    <div class="ornament-divider">
+                    <div class="divider">
                         <span></span>
                         <i>◆</i>
                         <span></span>
                     </div>
 
 
-                    <div class="attendance-buttons">
+                    <p class="intro-copy">
+                        Julie & Loïc vous convient
+                        <br>
+                        à célébrer leur union
+                        <br>
+                        lors d'une soirée mémorable !
+                    </p>
+
+
+                    <div class="attendance-grid">
 
                         <button
+                            class="attendance-card"
                             type="button"
-                            class="attendance-button"
                             onclick="chooseAttendance('oui')"
                         >
-                            <span class="button-icon">⚔</span>
-                            <span>Avec joie</span>
-                            <span class="button-icon">⚔</span>
+
+                            <svg
+                                class="attendance-icon"
+                                viewBox="0 0 64 64"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M20 8h24l-2 15c-1.2 8.2-5.2 13-10 14.5V48h8v6H24v-6h8V37.5C27.2 36 23.2 31.2 22 23L20 8Z"
+                                />
+                                <path
+                                    d="M20 14h24"
+                                />
+                            </svg>
+
+                            <span>AVEC JOIE</span>
+
                         </button>
 
 
                         <button
+                            class="attendance-card"
                             type="button"
-                            class="attendance-button"
                             onclick="chooseAttendance('non')"
                         >
-                            <span class="button-icon">🕯</span>
-                            <span>Hélas</span>
-                            <span class="button-icon">🕯</span>
+
+                            <svg
+                                class="attendance-icon broken"
+                                viewBox="0 0 64 64"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M20 8h24l-1.5 11"
+                                />
+
+                                <path
+                                    d="M39 29c-1.5 4.2-4 7-7 8.5V48h8v6H24v-6h8V37.5C27 36 23 31 22 23L20 8"
+                                />
+
+                                <path
+                                    d="M38 18l-8 9 7 3-8 10"
+                                />
+                            </svg>
+
+                            <span>HÉLAS</span>
+
                         </button>
 
                     </div>
 
-                </div>
+
+                    <div class="divider divider-bottom">
+                        <span></span>
+                        <i>◆</i>
+                        <span></span>
+                    </div>
 
 
-                <div class="date">
-                    <span class="date-main">
-                        19 · 06 · 2027
-                    </span>
+                    <div class="date">
 
-                    <span class="date-place">
-                        MARESVILLE
-                    </span>
-                </div>
+                        <strong>
+                            19 · 06 · 2027
+                        </strong>
+
+                        <span>
+                            ◆ MARESVILLE ◆
+                        </span>
+
+                    </div>
+
+                </section>
 
             </div>
 
@@ -149,92 +166,37 @@
          QUESTIONNAIRE
     ====================================================== -->
 
-    <main
-        id="questionnaire"
-        class="screen"
-    >
+    <main id="questionnaire" class="screen">
 
-        <section class="parchment questionnaire-card">
+        <section class="parchment">
 
-            <!-- DÉCOR -->
-            <div class="inner-border"></div>
-
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
+            <div class="safe-zone questionnaire-layout">
 
 
-            <div class="questionnaire-layout">
+                <!-- espace réservé au logo intégré au fond -->
+
+                <div class="logo-clearance"></div>
 
 
-                <!-- EN-TÊTE FIXE -->
+                <!-- QUESTION -->
 
-                <header class="questionnaire-heading">
-
-                    <div class="mini-ornament">
-                        ✦
-                    </div>
-
-                    <h1 class="questionnaire-title">
-                        VOTRE RÉPONSE
-                    </h1>
-
-                    <p class="subtitle">
-                        Quelques dernières informations
-                        avant de sceller votre réponse.
-                    </p>
-
-                    <div class="ornament-divider">
-                        <span></span>
-                        <i>◆</i>
-                        <span></span>
-                    </div>
-
-                </header>
+                <section
+                    id="question-container"
+                    class="question-stage"
+                ></section>
 
 
 
-                <!-- ZONE DE QUESTION -->
+                <!-- FOOTER -->
 
-                <div class="question-stage">
+                <footer class="question-footer">
 
-                    <div
-                        id="question-container"
-                        class="question-container"
-                    ></div>
+                    <div class="progress-track">
 
-                </div>
-
-
-
-                <!-- BAS DE PAGE FIXE -->
-
-                <footer class="questionnaire-footer">
-
-                    <div class="progress-section">
-
-                        <div class="progress-label">
-
-                            <span>
-                                CHEMINEMENT
-                            </span>
-
-                            <span id="progress-text">
-                                Question 1 / 7
-                            </span>
-
-                        </div>
-
-
-                        <div class="progress-bar-wrapper">
-
-                            <div
-                                id="progress-bar"
-                                class="progress-bar"
-                            ></div>
-
-                        </div>
+                        <div
+                            id="progress-bar"
+                            class="progress-bar"
+                        ></div>
 
                     </div>
 
@@ -242,24 +204,22 @@
                     <div class="navigation">
 
                         <button
-                            type="button"
                             id="previous-button"
+                            type="button"
                             class="nav-button previous"
                             onclick="previousQuestion()"
                         >
-                            <span>←</span>
-                            <span>RETOUR</span>
+                            ← RETOUR
                         </button>
 
 
                         <button
-                            type="button"
                             id="next-button"
+                            type="button"
                             class="nav-button next"
                             onclick="nextQuestion()"
                         >
-                            <span>CONTINUER</span>
-                            <span>→</span>
+                            CONTINUER →
                         </button>
 
                     </div>
@@ -275,65 +235,22 @@
 
 
     <!-- =====================================================
-         MESSAGE FINAL
+         CONFIRMATION
     ====================================================== -->
 
-    <main
-        id="success"
-        class="screen"
-    >
+    <main id="success" class="screen">
 
-        <section class="parchment success-card">
+        <section class="parchment">
 
-            <div class="inner-border"></div>
+            <div class="safe-zone success-layout">
 
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
+                <div class="logo-clearance"></div>
 
 
-            <div
-                id="success-content"
-                class="success-content"
-            >
-
-                <div class="mini-ornament">
-                    ✦
-                </div>
-
-                <p class="small-title">
-                    VOTRE RÉPONSE A BIEN ÉTÉ REÇUE
-                </p>
-
-                <h2>
-                    VOTRE RÉPONSE
-                    <br>
-                    A ÉTÉ SCELLÉE
-                </h2>
-
-                <div class="ornament-divider">
-                    <span></span>
-                    <i>◆</i>
-                    <span></span>
-                </div>
-
-                <p class="success-text">
-                    Merci d'avoir répondu à notre invitation.
-                </p>
-
-                <p class="success-text">
-                    Nous avons hâte de partager
-                    cette journée avec vous.
-                </p>
-
-                <p class="final-message">
-                    Avec toute notre affection,
-                </p>
-
-                <p class="final-signature">
-                    ✦ Julie & Loïc ✦
-                </p>
+                <div
+                    id="success-content"
+                    class="success-content"
+                ></div>
 
             </div>
 
@@ -344,10 +261,7 @@
 </div>
 
 
-<script
-    src="script.js"
-    defer
-></script>
+<script src="script.js" defer></script>
 
 </body>
 
