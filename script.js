@@ -1,14 +1,14 @@
-/* =========================================
+/* =========================================================
    CONNEXION GOOGLE SHEETS
-========================================= */
+========================================================= */
 
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbxUR9o_iIO5gFRKaVz_8MiDOCdX2VDuQQSdKyRm9_OJ5XMGla9lhvc_ajmMfLoOp6Xf/exec";
 
 
-/* =========================================
+/* =========================================================
    QUESTIONS DU MARIAGE
-========================================= */
+========================================================= */
 
 const questions = [
 
@@ -21,6 +21,7 @@ const questions = [
         placeholder:
             "Prénom et nom..."
     },
+
 
     {
         type: "choice",
@@ -38,6 +39,7 @@ const questions = [
         ]
     },
 
+
     {
         type: "choice",
 
@@ -49,6 +51,7 @@ const questions = [
             "🏰 Non"
         ]
     },
+
 
     {
         type: "choice",
@@ -64,6 +67,7 @@ const questions = [
         ]
     },
 
+
     {
         type: "text",
 
@@ -73,6 +77,7 @@ const questions = [
         placeholder:
             "Aucune restriction ? Indiquez simplement « Aucune »..."
     },
+
 
     {
         type: "choice",
@@ -87,6 +92,7 @@ const questions = [
         ]
     },
 
+
     {
         type: "text",
 
@@ -100,9 +106,9 @@ const questions = [
 ];
 
 
-/* =========================================
-   VARIABLES
-========================================= */
+/* =========================================================
+   ÉTAT DU QUESTIONNAIRE
+========================================================= */
 
 let currentQuestion = 0;
 
@@ -110,10 +116,12 @@ let answers = [];
 
 let declined = false;
 
+let isSubmitting = false;
 
-/* =========================================
-   ELEMENTS HTML
-========================================= */
+
+/* =========================================================
+   ÉLÉMENTS HTML
+========================================================= */
 
 const intro =
     document.getElementById("intro");
@@ -123,6 +131,9 @@ const questionnaire =
 
 const success =
     document.getElementById("success");
+
+const successContent =
+    document.getElementById("success-content");
 
 const questionContainer =
     document.getElementById("question-container");
@@ -140,11 +151,57 @@ const nextButton =
     document.getElementById("next-button");
 
 
-/* =========================================
-   CHOIX DE LA PRÉSENCE
-========================================= */
+/* =========================================================
+   UTILITAIRE : CHANGEMENT D'ÉCRAN
+========================================================= */
+
+function showScreen(screenToShow) {
+
+    const screens = [
+        intro,
+        questionnaire,
+        success
+    ];
+
+
+    screens.forEach(
+        screen => {
+
+            screen.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    screenToShow.classList.add(
+        "active"
+    );
+
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   CHOIX DE PRÉSENCE
+========================================================= */
 
 function chooseAttendance(choice) {
+
+    /*
+        On réinitialise la navigation
+        tout en conservant uniquement
+        le choix de présence.
+    */
+
+    answers = [];
+
 
     if (choice === "oui") {
 
@@ -155,46 +212,48 @@ function chooseAttendance(choice) {
 
     }
 
-    else if (choice === "non") {
+
+    else {
 
         answers[0] =
             "🕯️ Hélas, je ne pourrai être des nôtres.";
 
         declined = true;
+
     }
 
 
-    /*
-       On quitte directement la première page
-       et on commence le questionnaire à la
-       question du nom.
-    */
-
-    intro.classList.remove("active");
-
-    questionnaire.classList.add("active");
-
     currentQuestion = 0;
+
+    showScreen(
+        questionnaire
+    );
 
     showQuestion();
 }
 
 
-/* =========================================
+/* =========================================================
    AFFICHER UNE QUESTION
-========================================= */
+========================================================= */
 
 function showQuestion() {
 
     const question =
         questions[currentQuestion];
 
+
+    /*
+        On vide complètement la zone
+        avant de créer la nouvelle question.
+    */
+
     questionContainer.innerHTML = "";
 
 
-    /* ---------------------------------------
-       NUMÉRO
-    --------------------------------------- */
+    /* -----------------------------------------------------
+       NUMÉRO DE QUESTION
+    ----------------------------------------------------- */
 
     const number =
         document.createElement("div");
@@ -202,15 +261,19 @@ function showQuestion() {
     number.className =
         "question-number";
 
+
     number.textContent =
         `QUESTION ${currentQuestion + 1}`;
 
-    questionContainer.appendChild(number);
+
+    questionContainer.appendChild(
+        number
+    );
 
 
-    /* ---------------------------------------
+    /* -----------------------------------------------------
        TITRE
-    --------------------------------------- */
+    ----------------------------------------------------- */
 
     const title =
         document.createElement("h2");
@@ -221,12 +284,15 @@ function showQuestion() {
     title.textContent =
         question.title;
 
-    questionContainer.appendChild(title);
+
+    questionContainer.appendChild(
+        title
+    );
 
 
-    /* ---------------------------------------
-       QUESTIONS À CHOIX
-    --------------------------------------- */
+    /* -----------------------------------------------------
+       QUESTION À CHOIX
+    ----------------------------------------------------- */
 
     if (question.type === "choice") {
 
@@ -238,49 +304,62 @@ function showQuestion() {
 
 
         question.answers.forEach(
-            (answer) => {
+            answer => {
 
                 const button =
                     document.createElement("button");
 
-                button.type = "button";
+
+                button.type =
+                    "button";
+
 
                 button.className =
                     "answer-button";
+
 
                 button.textContent =
                     answer;
 
 
+                /*
+                    Restaure la sélection
+                    lorsqu'on revient en arrière.
+                */
+
                 if (
-                    answers[currentQuestion + 1] ===
-                    answer
+                    answers[currentQuestion + 1]
+                    === answer
                 ) {
 
                     button.classList.add(
                         "selected"
                     );
+
                 }
 
 
-                button.onclick =
-                    function () {
+                button.addEventListener(
+                    "click",
+                    () => {
 
                         answers[
                             currentQuestion + 1
                         ] = answer;
 
 
-                        document
+                        answersContainer
                             .querySelectorAll(
                                 ".answer-button"
                             )
                             .forEach(
-                                btn => {
+                                currentButton => {
 
-                                    btn.classList.remove(
-                                        "selected"
-                                    );
+                                    currentButton
+                                        .classList
+                                        .remove(
+                                            "selected"
+                                        );
 
                                 }
                             );
@@ -289,7 +368,9 @@ function showQuestion() {
                         button.classList.add(
                             "selected"
                         );
-                    };
+
+                    }
+                );
 
 
                 answersContainer.appendChild(
@@ -303,31 +384,51 @@ function showQuestion() {
         questionContainer.appendChild(
             answersContainer
         );
+
     }
 
 
-    /* ---------------------------------------
-       QUESTIONS TEXTE
-    --------------------------------------- */
+    /* -----------------------------------------------------
+       QUESTION TEXTE
+    ----------------------------------------------------- */
 
     if (question.type === "text") {
 
         const input =
             document.createElement("textarea");
 
+
         input.className =
             "text-input";
+
 
         input.placeholder =
             question.placeholder;
 
+
         input.value =
-            answers[currentQuestion + 1] || "";
+            answers[
+                currentQuestion + 1
+            ] || "";
+
+
+        input.setAttribute(
+            "maxlength",
+            "600"
+        );
+
+
+        input.setAttribute(
+            "autocomplete",
+            currentQuestion === 0
+                ? "name"
+                : "off"
+        );
 
 
         input.addEventListener(
             "input",
-            function () {
+            () => {
 
                 answers[
                     currentQuestion + 1
@@ -340,103 +441,166 @@ function showQuestion() {
         questionContainer.appendChild(
             input
         );
+
     }
 
 
-    /* ---------------------------------------
-       PROGRESSION
-    --------------------------------------- */
+    updateProgress();
+
+    updateNavigation();
+}
+
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+function updateProgress() {
 
     const totalQuestions =
-        declined ? 1 : questions.length;
+        declined
+            ? 1
+            : questions.length;
+
+
+    const visibleQuestion =
+        declined
+            ? 1
+            : currentQuestion + 1;
+
 
     const progress =
         (
-            (currentQuestion + 1)
+            visibleQuestion
             / totalQuestions
         ) * 100;
 
 
     progressBar.style.width =
-        progress + "%";
+        `${progress}%`;
 
 
     progressText.textContent =
-        `Question ${currentQuestion + 1} / ${totalQuestions}`;
+        `Question ${visibleQuestion} / ${totalQuestions}`;
+
+}
 
 
-    /* ---------------------------------------
-       BOUTON RETOUR
-    --------------------------------------- */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-    if (currentQuestion === 0) {
+function updateNavigation() {
 
-        previousButton.style.visibility =
-            "hidden";
+    /*
+        Sur la première question,
+        RETOUR reste invisible mais conserve
+        sa place afin que CONTINUER ne bouge pas.
+    */
 
-    } else {
+    previousButton.style.visibility =
+        currentQuestion === 0
+            ? "hidden"
+            : "visible";
 
-        previousButton.style.visibility =
-            "visible";
-    }
 
-
-    /* ---------------------------------------
-       BOUTON SUIVANT
-    --------------------------------------- */
+    /*
+        Texte du dernier bouton.
+    */
 
     if (
         declined ||
         currentQuestion ===
-        questions.length - 1
+            questions.length - 1
     ) {
 
-        nextButton.textContent =
-            "⚔️ Sceller ma réponse";
+        nextButton.innerHTML =
+            `
+                <span>SCELLER MA RÉPONSE</span>
+                <span>⚔</span>
+            `;
 
-    } else {
+    }
 
-        nextButton.textContent =
-            "Continuer →";
+    else {
+
+        nextButton.innerHTML =
+            `
+                <span>CONTINUER</span>
+                <span>→</span>
+            `;
+
     }
 
 
-    nextButton.disabled = false;
+    nextButton.disabled =
+        isSubmitting;
+
 }
 
 
-/* =========================================
-   QUESTION SUIVANTE
-========================================= */
+/* =========================================================
+   VALIDATION DE LA QUESTION
+========================================================= */
 
-function nextQuestion() {
+function currentAnswerIsValid() {
 
-    const answerIndex =
-        currentQuestion + 1;
+    const answer =
+        answers[
+            currentQuestion + 1
+        ];
 
-    const currentAnswer =
-        answers[answerIndex];
+
+    if (answer === undefined) {
+        return false;
+    }
 
 
     if (
-        currentAnswer === undefined ||
-        currentAnswer.trim === undefined
-            ? false
-            : currentAnswer.trim() === ""
+        typeof answer === "string"
     ) {
+
+        return (
+            answer.trim().length > 0
+        );
+
+    }
+
+
+    return true;
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+function nextQuestion() {
+
+    if (isSubmitting) {
+        return;
+    }
+
+
+    /*
+        Une réponse est obligatoire
+        pour toutes les questions.
+    */
+
+    if (!currentAnswerIsValid()) {
 
         alert(
             "⚔️ Votre réponse est attendue avant de poursuivre."
         );
 
         return;
+
     }
 
 
     /*
-       Si la personne ne vient pas,
-       il n'y a qu'une seule question :
-       son nom.
+        Pour un invité absent,
+        seule la question du nom est posée.
     */
 
     if (declined) {
@@ -444,12 +608,12 @@ function nextQuestion() {
         finishDecline();
 
         return;
+
     }
 
 
     /*
-       Si la personne vient et qu'elle
-       est à la dernière question.
+        Dernière question.
     */
 
     if (
@@ -460,40 +624,90 @@ function nextQuestion() {
         finishQuest();
 
         return;
+
     }
 
 
     currentQuestion++;
 
     showQuestion();
+
 }
 
 
-/* =========================================
+/* =========================================================
    QUESTION PRÉCÉDENTE
-========================================= */
+========================================================= */
 
 function previousQuestion() {
 
-    if (currentQuestion > 0) {
+    if (
+        isSubmitting ||
+        currentQuestion === 0
+    ) {
 
-        currentQuestion--;
+        return;
 
-        showQuestion();
     }
+
+
+    currentQuestion--;
+
+    showQuestion();
+
 }
 
 
-/* =========================================
+/* =========================================================
+   ENVOI À GOOGLE SHEETS
+========================================================= */
+
+async function sendToGoogleSheets(
+    data
+) {
+
+    await fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+
+            body:
+                JSON.stringify(
+                    data
+                )
+        }
+    );
+
+}
+
+
+/* =========================================================
    FIN POUR UN INVITÉ ABSENT
-========================================= */
+========================================================= */
 
 async function finishDecline() {
 
+    if (isSubmitting) {
+        return;
+    }
+
+
+    isSubmitting = true;
+
     nextButton.disabled = true;
 
-    nextButton.textContent =
-        "🕯️ Transmission...";
+    nextButton.innerHTML =
+        `
+            <span>TRANSMISSION...</span>
+            <span>🕯</span>
+        `;
 
 
     const data = {
@@ -504,103 +718,44 @@ async function finishDecline() {
         nom:
             answers[1] || "",
 
-        compagnie: "",
+        compagnie:
+            "",
 
-        enfants: "",
+        enfants:
+            "",
 
-        menu: "",
+        menu:
+            "",
 
-        restrictions: "",
+        restrictions:
+            "",
 
-        hebergement: "",
+        hebergement:
+            "",
 
-        message: ""
+        message:
+            ""
+
     };
 
 
     try {
 
-        await fetch(
-            GOOGLE_SCRIPT_URL,
-            {
-                method: "POST",
-
-                mode: "no-cors",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify(data)
-            }
+        await sendToGoogleSheets(
+            data
         );
 
 
-        questionnaire.classList.remove(
-            "active"
+        renderDeclineSuccess();
+
+        showScreen(
+            success
         );
 
-        success.classList.add(
-            "active"
-        );
+    }
 
 
-        success.innerHTML = `
-
-            <div class="mini-ornament">
-                🕯️
-            </div>
-
-            <p class="small-title">
-                VOTRE RÉPONSE A BIEN ÉTÉ REÇUE
-            </p>
-
-            <h2>
-                UNE PLACE RESTERA
-                <br>
-                VIDE AU BANQUET
-            </h2>
-
-            <div class="ornament-divider">
-                <span></span>
-                <i>◆</i>
-                <span></span>
-            </div>
-
-            <p class="success-text">
-
-                Nous sommes sincèrement désolés
-                de ne pas pouvoir vous compter
-                parmi nous pour ce jour si important
-                à nos yeux.
-
-            </p>
-
-            <p class="success-text">
-
-                Votre présence nous manquera,
-                mais nous penserons bien à vous
-                en cette belle journée.
-
-            </p>
-
-            <p class="final-message">
-
-                Avec toute notre affection,
-
-            </p>
-
-            <p class="final-signature">
-
-                ✦ Julie & Loïc ✦
-
-            </p>
-        `;
-
-
-    } catch (error) {
+    catch (error) {
 
         console.error(
             "Erreur lors de l'envoi :",
@@ -613,24 +768,35 @@ async function finishDecline() {
         );
 
 
-        nextButton.disabled = false;
+        isSubmitting = false;
 
-        nextButton.textContent =
-            "⚔️ Sceller ma réponse";
+        updateNavigation();
+
     }
+
 }
 
 
-/* =========================================
+/* =========================================================
    FIN POUR UN INVITÉ PRÉSENT
-========================================= */
+========================================================= */
 
 async function finishQuest() {
 
+    if (isSubmitting) {
+        return;
+    }
+
+
+    isSubmitting = true;
+
     nextButton.disabled = true;
 
-    nextButton.textContent =
-        "⚔️ Scellement en cours...";
+    nextButton.innerHTML =
+        `
+            <span>SCELLEMENT...</span>
+            <span>⚔</span>
+        `;
 
 
     const data = {
@@ -658,85 +824,15 @@ async function finishQuest() {
 
         message:
             answers[7] || ""
+
     };
 
 
     try {
 
-        await fetch(
-            GOOGLE_SCRIPT_URL,
-            {
-                method: "POST",
-
-                mode: "no-cors",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body:
-                    JSON.stringify(data)
-            }
+        await sendToGoogleSheets(
+            data
         );
-
-
-        questionnaire.classList.remove(
-            "active"
-        );
-
-        success.classList.add(
-            "active"
-        );
-
-
-        success.innerHTML = `
-
-            <div class="mini-ornament">
-                ⚔️
-            </div>
-
-            <p class="small-title">
-                VOTRE RÉPONSE A BIEN ÉTÉ REÇUE
-            </p>
-
-            <h2>
-                VOTRE RÉPONSE
-                <br>
-                A ÉTÉ SCELLÉE
-            </h2>
-
-            <div class="ornament-divider">
-                <span></span>
-                <i>◆</i>
-                <span></span>
-            </div>
-
-            <p class="success-text">
-
-                Merci d'avoir répondu à notre invitation.
-
-            </p>
-
-            <p class="success-text">
-
-                Nous avons hâte de partager
-                cette journée avec vous.
-
-            </p>
-
-            <p class="final-message">
-
-                Avec toute notre affection,
-
-            </p>
-
-            <p class="final-signature">
-
-                ✦ Julie & Loïc ✦
-
-            </p>
-        `;
 
 
         console.log(
@@ -745,7 +841,16 @@ async function finishQuest() {
         );
 
 
-    } catch (error) {
+        renderPositiveSuccess();
+
+        showScreen(
+            success
+        );
+
+    }
+
+
+    catch (error) {
 
         console.error(
             "Erreur lors de l'envoi :",
@@ -758,9 +863,192 @@ async function finishQuest() {
         );
 
 
-        nextButton.disabled = false;
+        isSubmitting = false;
 
-        nextButton.textContent =
-            "⚔️ Sceller ma réponse";
+        updateNavigation();
+
     }
+
 }
+
+
+/* =========================================================
+   ÉCRAN FINAL — INVITÉ PRÉSENT
+========================================================= */
+
+function renderPositiveSuccess() {
+
+    successContent.innerHTML =
+        `
+
+            <div class="mini-ornament">
+                ⚔
+            </div>
+
+
+            <p class="small-title">
+                VOTRE RÉPONSE A BIEN ÉTÉ REÇUE
+            </p>
+
+
+            <h2>
+                VOTRE RÉPONSE
+                <br>
+                A ÉTÉ SCELLÉE
+            </h2>
+
+
+            <div class="ornament-divider">
+
+                <span></span>
+
+                <i>◆</i>
+
+                <span></span>
+
+            </div>
+
+
+            <p class="success-text">
+
+                Merci d'avoir répondu à notre invitation.
+
+            </p>
+
+
+            <p class="success-text">
+
+                Nous avons hâte de partager
+                cette journée avec vous.
+
+            </p>
+
+
+            <p class="final-message">
+
+                Avec toute notre affection,
+
+            </p>
+
+
+            <p class="final-signature">
+
+                ✦ Julie & Loïc ✦
+
+            </p>
+
+        `;
+
+}
+
+
+/* =========================================================
+   ÉCRAN FINAL — INVITÉ ABSENT
+========================================================= */
+
+function renderDeclineSuccess() {
+
+    successContent.innerHTML =
+        `
+
+            <div class="mini-ornament">
+                🕯
+            </div>
+
+
+            <p class="small-title">
+
+                VOTRE RÉPONSE A BIEN ÉTÉ REÇUE
+
+            </p>
+
+
+            <h2>
+
+                UNE PLACE RESTERA
+                <br>
+                VIDE AU BANQUET
+
+            </h2>
+
+
+            <div class="ornament-divider">
+
+                <span></span>
+
+                <i>◆</i>
+
+                <span></span>
+
+            </div>
+
+
+            <p class="success-text">
+
+                Nous sommes sincèrement désolés
+                de ne pas pouvoir vous compter parmi nous
+                pour ce jour si important à nos yeux.
+
+            </p>
+
+
+            <p class="success-text">
+
+                Votre présence nous manquera,
+                mais nous penserons bien à vous
+                en cette belle journée.
+
+            </p>
+
+
+            <p class="final-message">
+
+                Avec toute notre affection,
+
+            </p>
+
+
+            <p class="final-signature">
+
+                ✦ Julie & Loïc ✦
+
+            </p>
+
+        `;
+
+}
+
+
+/* =========================================================
+   TOUCHE ENTRÉE
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        /*
+            Ctrl + Entrée permet de continuer
+            depuis une question texte.
+
+            On n'utilise volontairement pas
+            Entrée seule pour permettre les
+            retours à la ligne dans les messages.
+        */
+
+        if (
+            event.key === "Enter" &&
+            event.ctrlKey &&
+            questionnaire.classList.contains(
+                "active"
+            )
+        ) {
+
+            event.preventDefault();
+
+            nextQuestion();
+
+        }
+
+    }
+);
