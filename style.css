@@ -457,7 +457,7 @@ input {
     padding-top:
         clamp(3px, 1vh, 9px);
 
-    transform: translateX(18px);
+    transform: translateX(20px);
 
     animation:
         questionFade .22s ease both;
