@@ -76,59 +76,33 @@
                     </p>
 
 
-                    <div class="attendance-grid">
+                 <div class="attendance-grid">
 
-                        <button
-                            class="attendance-card"
-                            type="button"
-                            onclick="chooseAttendance('oui')"
-                        >
+    <button
+        class="attendance-image-button"
+        type="button"
+        onclick="chooseAttendance('oui')"
+        aria-label="Avec joie"
+    >
+        <img
+            src="avec-joie.png"
+            alt="Avec joie"
+        >
+    </button>
 
-                            <svg
-                                class="attendance-icon"
-                                viewBox="0 0 64 64"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M20 8h24l-2 15c-1.2 8.2-5.2 13-10 14.5V48h8v6H24v-6h8V37.5C27.2 36 23.2 31.2 22 23L20 8Z"
-                                />
-                                <path d="M20 14h24" />
-                            </svg>
+    <button
+        class="attendance-image-button"
+        type="button"
+        onclick="chooseAttendance('non')"
+        aria-label="Hélas"
+    >
+        <img
+            src="helas.png"
+            alt="Hélas"
+        >
+    </button>
 
-                            <span>AVEC JOIE</span>
-
-                        </button>
-
-
-                        <button
-                            class="attendance-card"
-                            type="button"
-                            onclick="chooseAttendance('non')"
-                        >
-
-                            <svg
-                                class="attendance-icon"
-                                viewBox="0 0 64 64"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M20 8h24l-1.5 11"
-                                />
-
-                                <path
-                                    d="M39 29c-1.5 4.2-4 7-7 8.5V48h8v6H24v-6h8V37.5C27 36 23 31 22 23L20 8"
-                                />
-
-                                <path
-                                    d="M38 18l-8 9 7 3-8 10"
-                                />
-                            </svg>
-
-                            <span>HÉLAS</span>
-
-                        </button>
-
-                    </div>
+</div>
 
 
                     <div class="divider divider-bottom">
