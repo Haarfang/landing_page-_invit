@@ -539,7 +539,7 @@ input {
     gap:
         clamp(7px, 1vh, 10px);
 
-    transform: translateX(12px);
+    transform: translateX(16px);
 
 }
 
