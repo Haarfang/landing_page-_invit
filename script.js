@@ -486,15 +486,13 @@ function updateFooter() {
 
 function answerIsValid() {
 
-    const question =
-        questions[currentQuestion];
-
     /*
-       Si la question est facultative,
-       on autorise le passage sans réponse.
+       QUESTION 5 = restrictions alimentaires
+       currentQuestion commence à 0,
+       donc la question 5 correspond à l'index 4.
     */
 
-    if (question.optional === true) {
+    if (currentQuestion === 4) {
         return true;
     }
 
@@ -505,7 +503,10 @@ function answerIsValid() {
         ];
 
 
-    if (value === undefined) {
+    if (
+        value === undefined ||
+        value === null
+    ) {
         return false;
     }
 
@@ -513,17 +514,12 @@ function answerIsValid() {
     if (
         typeof value === "string"
     ) {
-
-        return (
-            value.trim().length > 0
-        );
-
+        return value.trim().length > 0;
     }
 
 
     return true;
 }
-
 
 function nextQuestion() {
 
