@@ -77,7 +77,7 @@ const questions = [
             "Le banquet devra-t-il tenir compte d'une allergie ou d'une restriction alimentaire ?",
 
         help:
-            "Allergie, intolérance, menu enfant ou autre besoin particulier… Si aucun, indiquez simplement « Aucun ».",
+            "Allergie, intolérance, menu enfant ou autre besoin particulier… ",
 
         placeholder:
             "Votre réponse..."
@@ -486,6 +486,19 @@ function updateFooter() {
 
 function answerIsValid() {
 
+    const question =
+        questions[currentQuestion];
+
+    /*
+       Si la question est facultative,
+       on autorise le passage sans réponse.
+    */
+
+    if (question.optional === true) {
+        return true;
+    }
+
+
     const value =
         answers[
             currentQuestion + 1
@@ -498,8 +511,7 @@ function answerIsValid() {
 
 
     if (
-        typeof value ===
-        "string"
+        typeof value === "string"
     ) {
 
         return (
@@ -510,7 +522,6 @@ function answerIsValid() {
 
 
     return true;
-
 }
 
 
