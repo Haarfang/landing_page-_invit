@@ -217,12 +217,9 @@ input {
     z-index: 5;
 
     padding:
-
         clamp(30px, 5.2vh, 48px)
-
-        clamp(34px, 9vw, 58px)
-
-        clamp(24px, 4vh, 38px);
+        clamp(42px, 10vw, 64px)
+        clamp(58px, 8vh, 78px);
 
 }
 
