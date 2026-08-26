@@ -30,8 +30,8 @@ const questions = [
             "2 personnes",
             "3 personnes",
             "4 personnes",
-            "5 personnes",
-            "6 personnes ou plus"
+            "5 personnes et plus"
+            
         ]
     },
 
