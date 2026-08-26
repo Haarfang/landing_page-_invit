@@ -1,9 +1,4 @@
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root {
-
     --brown: #3b1d12;
     --brown-dark: #28130d;
 
@@ -17,13 +12,8 @@
     --paper: #e7c985;
 
     --border: rgba(107, 70, 30, 0.58);
-
 }
 
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *,
 *::before,
@@ -45,7 +35,6 @@ body {
 
 
 body {
-
     min-height: 100dvh;
 
     overflow-x: hidden;
@@ -68,18 +57,11 @@ input {
 }
 
 
-/* =========================================================
-   APP
-========================================================= */
-
 .app {
-
     width: 100%;
-
     min-height: 100dvh;
 
     display: flex;
-
     justify-content: center;
 
     background:
@@ -88,20 +70,13 @@ input {
             #201914 0%,
             #0d0b09 75%
         );
-
 }
 
 
-/* =========================================================
-   ÉCRANS
-========================================================= */
-
 .screen {
-
     display: none;
 
     width: 100%;
-
     min-height: 100dvh;
 
     align-items: center;
@@ -111,22 +86,18 @@ input {
         max(5px, env(safe-area-inset-top))
         5px
         max(5px, env(safe-area-inset-bottom));
-
 }
 
 
 .screen.active {
-
     display: flex;
 
     animation:
         pageAppear .28s ease both;
-
 }
 
 
 @keyframes pageAppear {
-
     from {
         opacity: 0;
         transform: scale(.992);
@@ -136,16 +107,10 @@ input {
         opacity: 1;
         transform: scale(1);
     }
-
 }
 
 
-/* =========================================================
-   PARCHEMIN
-========================================================= */
-
 .parchment {
-
     position: relative;
 
     width:
@@ -164,16 +129,7 @@ input {
 
     overflow: hidden;
 
-    /*
-       PRIORITÉ :
-       background-mobile.png
-
-       Si tu ne l'as pas encore,
-       le navigateur utilisera background.png.
-    */
-
-    background-color:
-        #d9b66e;
+    background-color: #d9b66e;
 
     background-image:
         url("background-mobile.png"),
@@ -191,24 +147,14 @@ input {
         100% 100%,
         cover;
 
-    border-radius:
-        8px;
+    border-radius: 8px;
 
     box-shadow:
         0 15px 45px rgba(0, 0, 0, .55);
-
 }
 
 
-/* =========================================================
-   ZONE DE SÉCURITÉ
-
-   Elle empêche les contenus HTML d'aller
-   dans les décors du parchemin.
-========================================================= */
-
 .safe-zone {
-
     position: relative;
 
     width: 100%;
@@ -220,7 +166,6 @@ input {
         clamp(30px, 5.2vh, 48px)
         clamp(42px, 10vw, 64px)
         clamp(58px, 8vh, 78px);
-
 }
 
 
@@ -229,36 +174,29 @@ input {
 ========================================================= */
 
 .intro-layout {
-
     display: grid;
 
     grid-template-rows:
         24%
         76%;
-
 }
 
 
 .intro-spacer {
-
     pointer-events: none;
-
 }
 
 
 .intro-content {
-
     align-self: start;
 
     text-align: center;
 
     width: 100%;
-
 }
 
 
 .intro-content h1 {
-
     margin: 0;
 
     font-family:
@@ -275,14 +213,11 @@ input {
 
     letter-spacing: .5px;
 
-    color:
-        #711f17;
-
+    color: #711f17;
 }
 
 
 .divider {
-
     width: 54%;
 
     margin:
@@ -294,56 +229,44 @@ input {
     align-items: center;
 
     gap: 8px;
-
 }
 
 
 .divider span {
-
     flex: 1;
 
     height: 1px;
 
-    background:
-        var(--border);
-
+    background: var(--border);
 }
 
 
 .divider i {
-
     font-style: normal;
 
-    color:
-        var(--gold);
+    color: var(--gold);
 
     font-size: 8px;
-
 }
 
 
 .intro-copy {
-
-    margin:
-        0 auto;
+    margin: 0 auto;
 
     font-size:
         clamp(15px, 4vw, 19px);
 
     line-height: 1.30;
 
-    color:
-        #32180f;
-
+    color: #32180f;
 }
 
 
 /* =========================================================
-   BOUTONS AVEC JOIE / HÉLAS
+   BOUTONS D'ACCUEIL
 ========================================================= */
 
 .attendance-grid {
-
     width: 100%;
 
     margin:
@@ -359,12 +282,10 @@ input {
 
     gap:
         clamp(10px, 3vw, 18px);
-
 }
 
 
 .attendance-card {
-
     min-height:
         clamp(112px, 17vh, 150px);
 
@@ -389,15 +310,13 @@ input {
     border-radius: 4px;
 
     background:
-
         linear-gradient(
             145deg,
             rgba(129, 42, 30, .96),
             rgba(76, 17, 13, .98)
         );
 
-    color:
-        #edcb74;
+    color: #edcb74;
 
     font-family:
         "Cormorant Garamond",
@@ -410,7 +329,6 @@ input {
     font-weight: 700;
 
     box-shadow:
-
         inset
         0
         0
@@ -426,28 +344,22 @@ input {
     transition:
         transform .16s ease,
         filter .16s ease;
-
 }
 
 
 .attendance-card:active {
-
     transform:
         scale(.975);
-
 }
 
 
 .attendance-card:hover {
-
     filter:
         brightness(1.08);
-
 }
 
 
 .attendance-icon {
-
     width:
         clamp(44px, 12vw, 58px);
 
@@ -456,35 +368,26 @@ input {
 
     fill: none;
 
-    stroke:
-        #d9ae54;
+    stroke: #d9ae54;
 
     stroke-width: 2;
 
     stroke-linecap: round;
 
     stroke-linejoin: round;
-
 }
 
 
 .divider-bottom {
-
     margin-top:
         clamp(18px, 2.8vh, 26px);
 
     margin-bottom:
         clamp(12px, 2vh, 18px);
-
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
-
 .date {
-
     display: flex;
 
     flex-direction: column;
@@ -492,12 +395,10 @@ input {
     gap: 4px;
 
     text-align: center;
-
 }
 
 
 .date strong {
-
     font-family:
         "Cormorant Garamond",
         Georgia,
@@ -508,20 +409,15 @@ input {
 
     font-weight: 600;
 
-    letter-spacing:
-        3px;
-
+    letter-spacing: 3px;
 }
 
 
 .date span {
-
     font-size:
         clamp(13px, 3.6vw, 16px);
 
-    letter-spacing:
-        3px;
-
+    letter-spacing: 3px;
 }
 
 
@@ -530,34 +426,21 @@ input {
 ========================================================= */
 
 .questionnaire-layout {
-
     display: grid;
 
     grid-template-rows:
         18%
         minmax(0, 1fr)
         auto;
-
 }
 
-
-/*
-   ESPACE RÉSERVÉ AU J & L DU FOND
-*/
 
 .logo-clearance {
-
     pointer-events: none;
-
 }
 
 
-/* =========================================================
-   ZONE QUESTION
-========================================================= */
-
 .question-stage {
-
     width: 100%;
 
     min-height: 0;
@@ -576,12 +459,10 @@ input {
 
     animation:
         questionFade .22s ease both;
-
 }
 
 
 @keyframes questionFade {
-
     from {
         opacity: 0;
         transform: translateY(6px);
@@ -591,16 +472,10 @@ input {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
 
-/* =========================================================
-   NUMÉRO QUESTION
-========================================================= */
-
 .question-number {
-
     margin-bottom:
         clamp(15px, 2.3vh, 22px);
 
@@ -614,49 +489,35 @@ input {
 
     font-weight: 600;
 
-    letter-spacing:
-        1px;
+    letter-spacing: 1px;
 
-    color:
-        #4a2a17;
-
+    color: #4a2a17;
 }
 
 
 .question-number::before {
-
     content: "◆";
 
     margin-right: 8px;
 
-    color:
-        var(--gold);
+    color: var(--gold);
 
     font-size: 7px;
-
 }
 
 
 .question-number::after {
-
     content: "◆";
 
     margin-left: 8px;
 
-    color:
-        var(--gold);
+    color: var(--gold);
 
     font-size: 7px;
-
 }
 
 
-/* =========================================================
-   TITRE QUESTION
-========================================================= */
-
 .question-title {
-
     width: 100%;
 
     max-width: 400px;
@@ -678,18 +539,11 @@ input {
 
     font-weight: 600;
 
-    color:
-        #27140e;
-
+    color: #27140e;
 }
 
 
-/* =========================================================
-   PETITE ICÔNE DE QUESTION
-========================================================= */
-
 .question-symbol {
-
     width: 44px;
     height: 44px;
 
@@ -703,8 +557,7 @@ input {
     align-items: center;
     justify-content: center;
 
-    color:
-        #80501c;
+    color: #80501c;
 
     font-family:
         "Cormorant Garamond",
@@ -712,16 +565,10 @@ input {
         serif;
 
     font-size: 32px;
-
 }
 
 
-/* =========================================================
-   RÉPONSES
-========================================================= */
-
 .answers {
-
     width: 100%;
 
     display: flex;
@@ -730,12 +577,10 @@ input {
 
     gap:
         clamp(7px, 1vh, 10px);
-
 }
 
 
 .answer-button {
-
     width: 100%;
 
     min-height:
@@ -762,8 +607,7 @@ input {
     background:
         rgba(235, 207, 152, .25);
 
-    color:
-        #29140d;
+    color: #29140d;
 
     font-family:
         "Crimson Text",
@@ -777,34 +621,27 @@ input {
         background .16s ease,
         color .16s ease,
         transform .13s ease;
-
 }
 
 
 .answer-button::after {
-
     content: "›";
 
     margin-left: auto;
 
     font-size: 24px;
 
-    color:
-        #6b411d;
-
+    color: #6b411d;
 }
 
 
 .answer-button:active {
-
     transform:
         scale(.985);
-
 }
 
 
 .answer-button.selected {
-
     border-color:
         #5f1b13;
 
@@ -817,32 +654,21 @@ input {
 
     color:
         #f1d291;
-
 }
 
 
 .answer-button.selected::after {
-
     color:
         #f1d291;
-
 }
 
 
-/* =========================================================
-   MENU : 2 GROS BOUTONS
-========================================================= */
-
 .answers.menu-answers {
-
-    gap:
-        12px;
-
+    gap: 12px;
 }
 
 
 .menu-answers .answer-button {
-
     min-height:
         clamp(64px, 9vh, 82px);
 
@@ -855,16 +681,10 @@ input {
 
     font-size:
         clamp(18px, 4.8vw, 22px);
-
 }
 
 
-/* =========================================================
-   CHAMP TEXTE
-========================================================= */
-
 .text-input {
-
     width: 100%;
 
     min-height:
@@ -874,8 +694,7 @@ input {
 
     resize: none;
 
-    padding:
-        14px;
+    padding: 14px;
 
     border:
         1px solid
@@ -896,39 +715,28 @@ input {
         Georgia,
         serif;
 
-    font-size:
-        16px;
+    font-size: 16px;
 
     line-height: 1.35;
-
 }
 
 
 .text-input::placeholder {
-
     color:
         rgba(63, 37, 22, .55);
-
 }
 
 
 .text-input:focus {
-
     border-color:
         #7a281d;
 
     background:
         rgba(245, 220, 171, .42);
-
 }
 
 
-/* =========================================================
-   TEXTE D'AIDE
-========================================================= */
-
 .question-help {
-
     width: 95%;
 
     margin:
@@ -943,23 +751,19 @@ input {
 
     color:
         #53311d;
-
 }
 
 
 /* =========================================================
-   FOOTER QUESTIONNAIRE
+   FOOTER
 ========================================================= */
 
 .question-footer {
-
     width: 100%;
-
 }
 
 
 .progress-track {
-
     width: 100%;
     height: 6px;
 
@@ -974,12 +778,10 @@ input {
 
     background:
         rgba(91, 53, 23, .15);
-
 }
 
 
 .progress-bar {
-
     width: 0%;
     height: 100%;
 
@@ -988,16 +790,10 @@ input {
 
     transition:
         width .28s ease;
-
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
 .navigation {
-
     width: 100%;
 
     display: grid;
@@ -1008,14 +804,11 @@ input {
 
     gap:
         clamp(10px, 3vw, 16px);
-
 }
 
 
 .nav-button {
-
-    min-height:
-        45px;
+    min-height: 45px;
 
     padding:
         9px
@@ -1038,20 +831,16 @@ input {
     transition:
         transform .14s ease,
         filter .14s ease;
-
 }
 
 
 .nav-button:active {
-
     transform:
         scale(.98);
-
 }
 
 
 .nav-button.previous {
-
     border:
         1px solid
         rgba(92, 54, 26, .6);
@@ -1061,12 +850,10 @@ input {
 
     color:
         #371c11;
-
 }
 
 
 .nav-button.next {
-
     border:
         1px solid
         #48110e;
@@ -1080,14 +867,11 @@ input {
 
     color:
         #f4d89b;
-
 }
 
 
 .nav-button:disabled {
-
     opacity: .55;
-
 }
 
 
@@ -1096,30 +880,25 @@ input {
 ========================================================= */
 
 .success-layout {
-
     display: grid;
 
     grid-template-rows:
         20%
         1fr;
-
 }
 
 
 .success-content {
-
     align-self: start;
 
     padding-top:
         clamp(20px, 4vh, 45px);
 
     text-align: center;
-
 }
 
 
 .success-content h2 {
-
     margin: 0;
 
     font-family:
@@ -1134,22 +913,18 @@ input {
 
     color:
         #711f17;
-
 }
 
 
 .success-content .divider {
-
     margin:
         20px
         auto
         27px;
-
 }
 
 
 .success-text {
-
     margin:
         9px
         auto;
@@ -1160,23 +935,19 @@ input {
         clamp(16px, 4.2vw, 19px);
 
     line-height: 1.35;
-
 }
 
 
 .final-message {
-
     margin-top:
         clamp(28px, 5vh, 44px);
 
     font-size:
         15px;
-
 }
 
 
 .final-signature {
-
     margin:
         7px 0 0;
 
@@ -1192,126 +963,86 @@ input {
 
     color:
         #711f17;
-
 }
 
-
-/* =========================================================
-   TABLETTE / PC
-
-   On conserve volontairement le format mobile
-   sous forme de carte centrale.
-========================================================= */
 
 @media (min-width: 600px) {
 
     .screen {
-
-        padding:
-            20px;
-
+        padding: 20px;
     }
 
 
     .parchment {
-
         height:
             min(
                 calc(100dvh - 40px),
                 900px
             );
-
     }
 
 }
 
-
-/* =========================================================
-   PETITS TÉLÉPHONES
-========================================================= */
 
 @media (max-height: 700px) {
 
     .safe-zone {
-
         padding-top: 25px;
-
-        padding-bottom: 20px;
-
+        padding-bottom: 45px;
     }
 
 
     .intro-layout {
-
         grid-template-rows:
             21%
             79%;
-
     }
 
 
     .questionnaire-layout {
-
         grid-template-rows:
             16%
             minmax(0, 1fr)
             auto;
-
     }
 
 
     .question-title {
-
         margin-bottom: 13px;
 
         font-size:
             clamp(19px, 5.5vw, 24px);
-
     }
 
 
     .question-number {
-
         margin-bottom: 10px;
-
     }
 
 
     .answer-button {
-
         min-height: 38px;
-
     }
 
 
     .text-input {
-
         min-height: 85px;
-
     }
 
 }
 
 
-/* =========================================================
-   TRÈS PETITS ÉCRANS / CLAVIER OUVERT
-========================================================= */
-
 @media (max-height: 560px) {
 
     .screen {
-
         overflow-y: auto;
 
         align-items: flex-start;
-
     }
 
 
     .parchment {
-
         height: 600px;
-
     }
 
 }
