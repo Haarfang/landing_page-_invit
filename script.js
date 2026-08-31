@@ -95,7 +95,7 @@ const questions = [
 
 
         title:
-            "Avant de sceller votre réponse, souhaitez-vous adresser quelques mots à Julie & Loïc ?",
+            "Avant de sceller votre réponse, souhaitez-vous nous adresser quelques mots ?",
 
         placeholder:
             "Votre message..."
