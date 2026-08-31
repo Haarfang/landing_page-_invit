@@ -32,17 +32,20 @@ const questions = [
     },
 
 
-    {
-        type: "choice",
+   {
+    type: "choice",
 
-        title:
-            "De jeunes écuyers vous accompagneront-ils ?",
+    title:
+        "Combien de jeunes écuyers vous accompagneront ?",
 
-        answers: [
-            "Oui",
-            "Non"
-        ]
-    },
+    answers: [
+        "Aucun",
+        "1 écuyer",
+        "2 écuyers",
+        "3 écuyers",
+        "4 écuyers ou plus"
+    ]
+},
 
 
     {
