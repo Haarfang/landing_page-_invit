@@ -324,23 +324,16 @@ input {
 ========================================================= */
 
 .attendance-grid {
-
-    width: 100%;
-
-    margin:
-        clamp(18px, 2.8vh, 28px)
-        auto
-        0;
+    width: 78%;
+    max-width: 300px;
 
     display: grid;
+    grid-template-columns: 1fr 1fr;
 
-    grid-template-columns:
-        1fr
-        1fr;
+    gap: 12px;
 
-    gap:
-        clamp(10px, 3vw, 16px);
-
+    margin:
+        20px auto 0;
 }
 
 
