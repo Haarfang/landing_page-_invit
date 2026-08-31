@@ -216,6 +216,63 @@ input {
     color: #711f17;
 }
 
+.intro-date {
+
+    margin:
+        clamp(12px, 1.8vh, 18px)
+        auto
+        clamp(10px, 1.5vh, 16px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+
+    text-align: center;
+
+    color: #4b2617;
+
+}
+
+
+.intro-date-main {
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(18px, 4.8vw, 23px);
+
+    font-weight: 600;
+
+    letter-spacing:
+        3px;
+
+}
+
+
+.intro-date-place {
+
+    font-family:
+        "Crimson Text",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(12px, 3.2vw, 15px);
+
+    letter-spacing:
+        2.5px;
+
+    color:
+        #6a3a20;
+
+}
 
 .divider {
     width: 54%;
