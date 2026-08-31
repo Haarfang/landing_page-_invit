@@ -7,8 +7,6 @@ const questions = [
     {
         type: "text",
 
-        symbol: "✒",
-
         title:
             "Sous quel nom devons-nous inscrire votre présence dans les chroniques du Royaume ?",
 
@@ -19,8 +17,6 @@ const questions = [
 
     {
         type: "choice",
-
-        symbol: "♙",
 
         title:
             "Combien de personnes composeront votre compagnie pour cette noble journée ?",
@@ -39,8 +35,6 @@ const questions = [
     {
         type: "choice",
 
-        symbol: "♜",
-
         title:
             "De jeunes écuyers vous accompagneront-ils ?",
 
@@ -53,8 +47,6 @@ const questions = [
 
     {
         type: "choice",
-
-        symbol: "⚔",
 
         menu: true,
 
@@ -71,7 +63,6 @@ const questions = [
     {
         type: "text",
 
-        symbol: "❧",
 
         title:
             "Le banquet devra-t-il tenir compte d'une allergie ou d'une restriction alimentaire ?",
@@ -87,7 +78,6 @@ const questions = [
     {
         type: "choice",
 
-        symbol: "▱",
 
         title:
             "Après les festivités, aurez-vous besoin d'un refuge pour passer la nuit ?",
@@ -103,7 +93,6 @@ const questions = [
     {
         type: "text",
 
-        symbol: "✉",
 
         title:
             "Avant de sceller votre réponse, souhaitez-vous adresser quelques mots à Julie & Loïc ?",
