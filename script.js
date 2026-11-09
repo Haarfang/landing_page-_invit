@@ -8,7 +8,7 @@ const questions = [
         type: "text",
 
         title:
-            "Sous quel nom devons-nous inscrire votre présence dans les chroniques du Royaume ?",
+            "Sous quel nom devons-nous inscrire votre présence dans les Chroniques ?",
 
         placeholder:
             "Prénom et nom..."
@@ -19,7 +19,7 @@ const questions = [
         type: "choice",
 
         title:
-            "Combien de personnes composeront votre compagnie pour cette noble journée ?",
+            "Combien de personnes composeront votre compagnie ?",
 
         answers: [
             "1 personne",
