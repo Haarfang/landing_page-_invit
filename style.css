@@ -564,7 +564,7 @@ input {
 
 
 .answer-button {
-    width: 100%;
+    width: 85%;
 
     min-height:
         clamp(42px, 6vh, 54px);
