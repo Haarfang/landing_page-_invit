@@ -448,7 +448,7 @@ input {
     display: grid;
 
     grid-template-rows:
-        18%
+       23%
         minmax(0, 1fr)
         auto;
 }
