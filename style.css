@@ -324,22 +324,23 @@ input {
 ========================================================= */
 
 .attendance-grid {
-    width: 78%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 240px;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    gap: 12px;
+    gap: clamp(7px, 1vh, 12px);
 
-    margin:
-        20px auto 0;
+    margin: clamp(10px, 1.4vh, 16px) auto 0;
 }
 
 
 .attendance-image-button {
 
-    width: 100%;
+    /* Taille adaptée aux deux visuels superposés sur smartphone */
+    width: min(100%, clamp(130px, 19vh, 185px));
 
     padding: 0;
 
