@@ -25,8 +25,7 @@ const questions = [
             "1 personne",
             "2 personnes",
             "3 personnes",
-            "4 personnes",
-            "5 personnes et plus"
+            "4 personnes ou plus",
             
         ]
     },
@@ -42,8 +41,7 @@ const questions = [
         "Aucun",
         "1 écuyer",
         "2 écuyers",
-        "3 écuyers",
-        "4 écuyers ou plus"
+        "3 écuyers ou plus",
     ]
 },
 
@@ -292,7 +290,9 @@ function showQuestion() {
                 ? "answers menu-answers"
 
                 : "answers";
-
+if (currentQuestion === 1) {
+    answerContainer.classList.add("people-answers");
+}
 
         question.answers.forEach(
             answer => {
