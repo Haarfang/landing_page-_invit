@@ -1,4 +1,10 @@
-:root {
+@font-face {
+    font-family: "Black Kiyrand";
+    src: url("fonts/black-kiyrand.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}:root {
     --brown: #3b1d12;
     --brown-dark: #28130d;
 
